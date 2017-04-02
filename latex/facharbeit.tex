@@ -1,0 +1,108 @@
+% !TeX encoding = UTF-8
+
+\documentclass[a4paper,12pt]{scrartcl}      % Specifies the document class
+\usepackage{german}
+\usepackage{hyperref}
+\usepackage[
+type={CC},
+modifier={by-nc-sa},
+version={3.0},
+]{doclicense}
+
+% The preamble begins here.
+\title{Webapps}  % Declares the document's title.
+
+%\let\oldcite\cite
+%\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
+\newcommand{\ip}[2]{(#1, #2)}
+% Defines \ip{arg1}{arg2} to mean
+% (arg1, arg2).
+
+% Literaturverzeichnis
+\usepackage[style=numeric, backend=bibtex language=german]{biblatex}
+\usepackage[nottoc]{tocbibind}
+\addbibresource{literatur.bib}
+
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
+
+% Deutsche Umlaute
+\usepackage[utf8]{inputenc}
+
+% Formatierung
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage[sfdefault]{roboto}
+
+\definecolor{myGreen}{HTML}{009688}
+\chapterfont{\color{myGreen}}  % sets colour of chapters
+\sectionfont{\color{myGreen}}  % sets colour of sections
+
+\usepackage{geometry}
+\geometry{a4paper, top=25mm, left=30mm, right=30mm, bottom=25mm, headsep=10mm, footskip=12mm}
+
+\newcommand{\spacer}{\par\bigskip\noindent}
+
+\begin{document}             % End of preamble and beginning of text.
+	
+	\begin{titlepage}
+		\centering
+		{\scshape\LARGE Gymnasium zum kurf\"{u}rstlichen Schloss zu Mainz \par}
+		\vspace{1cm}
+		{\scshape\Large Facharbeit\par}
+		\vspace{2.5cm}
+		{\huge\bfseries Webapps\par}
+		\vspace{1cm}
+		{\Large\itshape das Ergebnis moderner Webtechnologien\par}
+		\vfill
+		von\par
+		Yannick \textsc{F\'elix}
+		
+		\vfill
+		
+		% Bottom of the page
+		{\large 24. April 2017 \par}
+		\newpage
+	\end{titlepage}
+	
+	\tableofcontents
+	\vfill
+	\doclicenseThis
+	\newpage
+	
+	\section{Kurzzusammenfassung}
+	Tut mir sehr leid, aber der Benutzerprofildienst ist heute leider nicht verfügbar.
+	Selbst der Gruppenrichtlinienclient kann hier leider nichts mehr ausrichten...
+	Versuche es in 42 Minuten erneut.
+	
+	\section{Geschichte und heutige Technologien}
+	
+	Bevor auf die Geschichte eingegangen wird muss zwischen zwei Typen von Sprachen unterschieden werden: Clientseitige Sprachen, welche beim Benutzer im Browser ausgeführt werden und serverseitige Sprachen, welche der Server ausführt, bevor oder während einer Anfrage. \par
+	
+	\subsection*{Clientseitige Sprachen}
+	
+	\textbf{HTML. Hypertext Markup Language.} Von Beginn des "Internets" an ist sie die Sprache zum grundlegenden Aufbau einer Webseite. Mit der Urversion von 1992 hat heutiges HTML nicht mehr viel zu tun. Damals war Hauptbestandteil der Text und dessen Verlinkung.\cite{htmlWiki}\par
+	Über die Jahre hinweg hat sich HTML zu HTML5 respektive HTML5.1(seit Ende 2016 \cite{html51}) entwickelt. Letzteres beinhaltet vor allem Verbesserungen hinsichtlich Webapps, zum Beispiel die Einbindung von \grqq{responsive Images}, Bildern, welche dem Browser in verschieden Auflösungen zur Verfügung gestellt werden. Der Browser entscheidet dann, welche Auflösung passend für die anzuzeigende Größe ist und veringert somit den Datenverkehr. \cite{html51blog}  \par
+	
+	
+	
+	\spacer\textbf{JavaScript, kurz auch JS.} Ursprünglich LiveScript genannt wurde JavaScript entwickelt um dynamisches HTML zu erlauben. Hierbei wird das HTML-Dokument nach dem Laden beim Benutzer verändert. Der Name JavaScript rührt daher, dass LiveScript in Kooperation von Netscape und Sun Mircosystems entwickelt wurden. Um die Bekanntheit von Sun's Sprache Java zu nutzen wurde LiveScript in JavaScript umbenannt, obwohl es eigentlich wenig mit Java syntaxtechnisch zu tun hat. \cite{jsWiki}\par
+	Heutzutage ist JavaScript Kernbestandteil von Webapps und handelt jegliche clientseitige Aktivität.\par
+	
+	
+	\spacer\textbf{JSON, JavaScript Object Notation}, ist ein Standard um Objekte zwischen verschiedenen Programmiersprachen zu serialisieren.\par
+	Vorteile von JSON gegenüber anderen Standards für einfachen Datenaustausch ist zum einen, dass es sowohl für Mensch, als auch für Maschine einfach zu lesen ist, zum anderen in praktisch jeder Programmiersprache ein Parser existiert um JSON-Objekte in respektive Objekte umzuwandeln. In JavaScript ist ein zusätzlicher Parser nicht von Nöten, da JSON eine valide JS Notation ist.\cite{json}\par
+	
+	
+	
+	\section{Heutige Technologien}
+	\section{Beispiel Schulplaner}
+	
+	
+	
+	\newpage
+
+	\section{Literaturverzeichnis}
+	\printbibliography[heading=none]
+
+\end{document}               % End of document.

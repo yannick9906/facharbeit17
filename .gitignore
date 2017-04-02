@@ -44,3 +44,15 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+# Latex
+/latex/*.aux
+/latex/*.bbl
+/latex/*.bcf
+/latex/*.blg
+/latex/*.log
+/latex/*.out
+/latex/*.xml
+/latex/*.gz
+/latex/*.toc
+/latex/facharbeit-blx.bib
