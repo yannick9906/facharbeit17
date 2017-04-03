@@ -19,7 +19,7 @@ version={3.0},
 % (arg1, arg2).
 
 % Literaturverzeichnis
-\usepackage[style=numeric, backend=bibtex language=german]{biblatex}
+\usepackage[style=numeric, backend=bibtex, language=german]{biblatex}
 \usepackage[nottoc]{tocbibind}
 \addbibresource{literatur.bib}
 
@@ -43,6 +43,11 @@ version={3.0},
 
 \newcommand{\spacer}{\par\bigskip\noindent}
 
+\newcommand\invisiblesection[1]{
+	\refstepcounter{section}
+	\addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+	\sectionmark{#1}}
+
 \begin{document}             % End of preamble and beginning of text.
 	
 	\begin{titlepage}
@@ -65,44 +70,62 @@ version={3.0},
 		\newpage
 	\end{titlepage}
 	
+	\setcounter{page}{1}
+	\section{Kurzfassung}
+	Tut mir sehr leid, aber der ``Benutzerprofildienst'' ist heute leider nicht verfügbar.
+	Selbst der ``Gruppenrichtlinienclient'' kann hier leider nichts mehr ausrichten...
+	Versuche es in 42 Minuten erneut.
+
+	\newpage
+	
+	\invisiblesection{Inhaltsverzeichnis}
 	\tableofcontents
 	\vfill
 	\doclicenseThis
+	
 	\newpage
-	
-	\section{Kurzzusammenfassung}
-	Tut mir sehr leid, aber der Benutzerprofildienst ist heute leider nicht verfügbar.
-	Selbst der Gruppenrichtlinienclient kann hier leider nichts mehr ausrichten...
-	Versuche es in 42 Minuten erneut.
-	
 	\section{Geschichte und heutige Technologien}
 	
-	Bevor auf die Geschichte eingegangen wird muss zwischen zwei Typen von Sprachen unterschieden werden: Clientseitige Sprachen, welche beim Benutzer im Browser ausgeführt werden und serverseitige Sprachen, welche der Server ausführt, bevor oder während einer Anfrage. \par
+	Bevor auf die Geschichte und verschieden Technologien eingegangen wird, muss zwischen zwei Typen von Sprachen unterschieden werden: Clientseitige Sprachen, welche beim Benutzer im Browser ausgeführt werden, und serverseitige Sprachen, welche der Server ausführt, bevor oder während einer Anfrage. \par
 	
-	\subsection*{Clientseitige Sprachen}
+	\subsection{Clientseitige Sprachen}
 	
 	\textbf{HTML. Hypertext Markup Language.} Von Beginn des "Internets" an ist sie die Sprache zum grundlegenden Aufbau einer Webseite. Mit der Urversion von 1992 hat heutiges HTML nicht mehr viel zu tun. Damals war Hauptbestandteil der Text und dessen Verlinkung.\cite{htmlWiki}\par
 	Über die Jahre hinweg hat sich HTML zu HTML5 respektive HTML5.1(seit Ende 2016 \cite{html51}) entwickelt. Letzteres beinhaltet vor allem Verbesserungen hinsichtlich Webapps, zum Beispiel die Einbindung von \grqq{responsive Images}, Bildern, welche dem Browser in verschieden Auflösungen zur Verfügung gestellt werden. Der Browser entscheidet dann, welche Auflösung passend für die anzuzeigende Größe ist und veringert somit den Datenverkehr. \cite{html51blog}  \par
 	
-	
-	
 	\spacer\textbf{JavaScript, kurz auch JS.} Ursprünglich LiveScript genannt wurde JavaScript entwickelt um dynamisches HTML zu erlauben. Hierbei wird das HTML-Dokument nach dem Laden beim Benutzer verändert. Der Name JavaScript rührt daher, dass LiveScript in Kooperation von Netscape und Sun Mircosystems entwickelt wurden. Um die Bekanntheit von Sun's Sprache Java zu nutzen wurde LiveScript in JavaScript umbenannt, obwohl es eigentlich wenig mit Java syntaxtechnisch zu tun hat. \cite{jsWiki}\par
 	Heutzutage ist JavaScript Kernbestandteil von Webapps und handelt jegliche clientseitige Aktivität.\par
-	
+	Neben JS existieren bzw. existierten auch weitere Skriptsprachen, wie Flash und JavaApplets. Beide sind mittlerweile als obsolet markiert und stellen durch Sicherheitslücken ein hohes Sicherheitsrisiko dar.\cite{flashPlayer} Chrome hat diese, wie andere Browser auch, bereits standardmäßig deaktiviert.\cite{chromeNoFlash}\par
 	
 	\spacer\textbf{JSON, JavaScript Object Notation}, ist ein Standard um Objekte zwischen verschiedenen Programmiersprachen zu serialisieren.\par
 	Vorteile von JSON gegenüber anderen Standards für einfachen Datenaustausch ist zum einen, dass es sowohl für Mensch, als auch für Maschine einfach zu lesen ist, zum anderen in praktisch jeder Programmiersprache ein Parser existiert um JSON-Objekte in respektive Objekte umzuwandeln. In JavaScript ist ein zusätzlicher Parser nicht von Nöten, da JSON eine valide JS Notation ist.\cite{json}\par
+	Andere Standards zum Austausch von Daten sind zum Beispiel YAML und XML. Letzteres wird jedoch immer häufiger durch JSON ersetzt, da XML in der Kompilierung weit aus aufwendiger ist und für weniger Nutzdaten mehr Speicher benötigt.\par
 	
+	\spacer\textbf{AJAX, Asynchronous JavaScript and XML}, ist ein grundlegender Bestandteil moderner Webanwendungen. AJAX ermöglicht es, anders als der Name vermuten lässt, nicht nur XML sondern jegliche Daten vom Server asynchron, also nachdem die eigentliche HTML-Seite bereits geladen wurde, nachzuladen. Hierbei wird von JavaScript eine HTTP- bzw. HTTPs-Anfrage initiert, dessen Antwort daraufhin auch von JavaScript verarbeitet wird, um zum Beispiel Teile einer Seite zu aktualisieren, ohne die gesamte Seite neuladen zu müssen.\cite{ajaxWiki}\par
 	
+	\spacer\textbf{WebSockets}, werden, im Gegensatz zu AJAX-Verbindungen, aufrecht erhalten, um so schnell wie möglich Daten zwischen dem Server und dem Client austauschen zu können. Diese Technologie eignet sich vor allem für Echtzeitanwendungen, wie Livechats und Browserspiele\cite{websocketWiki}\par
 	
+	\subsection{Serverseitige Sprachen}
+	
+	\spacer\textbf{PHP, ``PHP: Hypertext Preprocessor''}, mittlerweile, mit über 80\% der Websites, die am weitesten verbreitetste serverseitige Skriptsprache.\cite{phpCoverage}\par
+	PHP1, damals noch für \emph{Personal Home Page Tools}, wurde als Ersatz zu Perlskripten von Rasmus Lerdorf entwickelt. Mit PHP3, welches von Andi Gutmans und Zeev Suraski entwickelt wurde(Lerdorf wurde als Entwickler auch eingestellt), wurde die Sprache von Grund auf neu entwickelt und unter dem rekursiven Akronym \emph{PHP: Hypertext Preprocessor} veröffentlicht.\par
+	Mit PHP4 war es zudem möglich objektorientiert zu Programmieren, welches mit PHP5 weiter verbessert wurde.\par
+	Die aktuellste Version ist PHP7.1. Mit PHP7 kamen, 11 Jahre nach PHP5, vorallem eine verbesserte Performance und sowie einige neue Features dazu.\cite{phpWiki}\par
+	\newpage
 	\section{Heutige Technologien}
+	\newpage
 	\section{Beispiel Schulplaner}
 	
+	\newpage
+	\section{Anhang}
+	\subsection{Literaturverzeichnis}
+	\printbibliography[heading=none]
 	
+	\subsection{Quellcode}
+	To follow
 	
 	\newpage
-
-	\section{Literaturverzeichnis}
-	\printbibliography[heading=none]
+	\section{Erklärung über die selbständige Anfertigung der Arbeit}
+	Hiermit erkläre ich, Yannick F\'{e}lix, dass ich diese Arbeit über den Zeitraum von 12 Wochen selbst angefertigt habe.
 
 \end{document}               % End of document.
