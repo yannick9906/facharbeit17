@@ -4,6 +4,7 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
@@ -56,3 +57,10 @@ fabric.properties
 /latex/*.gz
 /latex/*.toc
 /latex/facharbeit-blx.bib
+/vendor
+/libs
+
+/css/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2
+/css/materialdesignicons.min.css
+/css/Zd2E9abXLFGSr9G3YK2MsDAdhzWOYhqHvOZMRGaEyPo.woff2
+fonts/

@@ -12,12 +12,6 @@ version={3.0},
 % The preamble begins here.
 \title{Webapps}  % Declares the document's title.
 
-%\let\oldcite\cite
-%\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
-\newcommand{\ip}[2]{(#1, #2)}
-% Defines \ip{arg1}{arg2} to mean
-% (arg1, arg2).
-
 % Literaturverzeichnis
 \usepackage[style=numeric, backend=bibtex, language=german]{biblatex}
 \usepackage[nottoc]{tocbibind}
@@ -72,6 +66,10 @@ version={3.0},
 	
 	\setcounter{page}{1}
 	\section{Kurzfassung}
+	WebApps wurden von den meisten Benutzern, wenn auch unbewusst, benutzt. Oft fallen diese garnicht auf, da sie intuitiv zu benutzen sind.\par
+	Immer dann, wenn wir eine Webseite benutzten können, ohne dabei die Webseite an sich zu verlassen, oder neuzuladen, handelt es sich um eine WebApp. Einige Beispiele sind die Google Suche, Google's Email Dienst GMail oder auch Facebook.\par
+	Große Firmen stecken oft viel Geld und Ressourcen in die Entwicklung von nativen Apps für die beliebtesten Betriebssysteme, darunter Windows, Android und iOS. WebApps und auch deren Erweiterung progressive WebApps sind jedoch platformunabhängig und können auf jedem Betriebsystem benutzt werden. Somit genügt es eine Anwendung einmal als (progressive) WebApp zu entwickeln.\par
+	Eine progressive WebApp ermöglicht es sogar den Eindruck zu erwecken, dass sie eine native App sei, ohne dabei auf bekannte Features, wie Offline-Modi und Push-Benachrichtigungen zu verzichten
 	Tut mir sehr leid, aber der ``Benutzerprofildienst'' ist heute leider nicht verfügbar.
 	Selbst der ``Gruppenrichtlinienclient'' kann hier leider nichts mehr ausrichten...
 	Versuche es in 42 Minuten erneut.
@@ -90,7 +88,7 @@ version={3.0},
 	
 	\subsection{Clientseitige Sprachen}
 	
-	\textbf{HTML. Hypertext Markup Language.} Von Beginn des "Internets" an ist sie die Sprache zum grundlegenden Aufbau einer Webseite. Mit der Urversion von 1992 hat heutiges HTML nicht mehr viel zu tun. Damals war Hauptbestandteil der Text und dessen Verlinkung.\cite{htmlWiki}\par
+	\textbf{HTML. Hypertext Markup Language.} Von Beginn des ``Internets'' an ist sie die Sprache zum grundlegenden Aufbau einer Webseite. Mit der Urversion von 1992 hat heutiges HTML nicht mehr viel zu tun. Damals war Hauptbestandteil der Text und dessen Verlinkung.\cite{htmlWiki}\par
 	Über die Jahre hinweg hat sich HTML zu HTML5 respektive HTML5.1(seit Ende 2016 \cite{html51}) entwickelt. Letzteres beinhaltet vor allem Verbesserungen hinsichtlich Webapps, zum Beispiel die Einbindung von \grqq{responsive Images}, Bildern, welche dem Browser in verschieden Auflösungen zur Verfügung gestellt werden. Der Browser entscheidet dann, welche Auflösung passend für die anzuzeigende Größe ist und veringert somit den Datenverkehr. \cite{html51blog}  \par
 	
 	\spacer\textbf{JavaScript, kurz auch JS.} Ursprünglich LiveScript genannt wurde JavaScript entwickelt um dynamisches HTML zu erlauben. Hierbei wird das HTML-Dokument nach dem Laden beim Benutzer verändert. Der Name JavaScript rührt daher, dass LiveScript in Kooperation von Netscape und Sun Mircosystems entwickelt wurden. Um die Bekanntheit von Sun's Sprache Java zu nutzen wurde LiveScript in JavaScript umbenannt, obwohl es eigentlich wenig mit Java syntaxtechnisch zu tun hat. \cite{jsWiki}\par
@@ -116,11 +114,35 @@ version={3.0},
 	DIe Funktion einer interaktiven Webseite setzt die Möglichkeit vorraus, dass der Webserver Daten empfangen kann, die der Benutzer eingegeben hat. Bereits in der Ur-Version von HTML war es möglich Werte an den Webserver zu schicken, ähnlich dem heutigen HTTP-GET Verfahren. Eine der ersten Seiten war ``SPIRES-HEP'', ein Webinterface für eine Datenbank der Stanford Universität aus dem Jahr 1991.\par
 	Die erste von der Öffentlichkeit wahrgenommene Webanwendung war Yahoo, welches ebenfalls an der Stanford Universität von zwei Studenten entwickelt wurde.\par
 	Seit AJAX in JavaScript Einzug erhalten hat, ist es möglich auch dynamisch Teile der angezeigten Webseite zu verändern, oder sogar die Präsentationsschicht komplett auf den Client auszulagern, hierbei sendet während der normalen Benutzung der Server nur noch benötigte Informationen.\cite{webappWiki}\par
-	Aktuell spricht man auch von ``Progressiven Web Apps'', wenn diese nicht nur komplett clientseitig ausgeführt werden können, sondern auch Features wie ein Offline-Modus und Push-Benachritigungen enthalten. Außerdem können diese zu einer native App werden und aussehen, als seien sie eine echte Anwendung. Trotzdem wird keine Installation benötigt. Leider werden diese bisher nur von Chrome und Firefox unterstützt, andere Browser haben aber bereits Ankündigungen auf eine baldige Implementierung sehen lassen.\cite{prwebappWiki}\par
+	Aktuell spricht man auch von ``Progressiven Web Apps'', wenn diese nicht nur komplett clientseitig ausgeführt werden können, sondern auch Features wie ein Offline-Modus und Push-Benachritigungen enthalten. Außerdem können diese den Eindruck erwecken, eine native App zu sein, obwohl keine Installation benötigt wird. Leider werden diese bisher nur von Chrome und Firefox unterstützt, andere Browser haben zum Zeitpunkt der Recherche angekündigt progressive WebApps in Zukunft zu unterstützen.\cite{prwebappWiki}\par
 	
 	\newpage
 	\section{Entwicklung einer progressiven WebApp}
-	\newpage
+	\subsection{Vorbereitung}
+	Zur Vorbereitung gehören neben der Einrichtung der Entwicklungsumgebung und des Webservers auch die Sammlung benötigter Bibliotheken.\par
+	Bei der Einrichtung des Webservers wurde ein Ordner für dieses Projekt samt passender Zugriffsrechte und gültigen SSL-Zertifikat erstellt. Dieses Zertifikat ist nicht nur für die Funktionalität von Service Workern, bei welchen eine Verbindung via SSL Pflicht ist, sondern auch für den generellen Datenschutz des Nutzers wichtig.\par
+	Bei den benutzten Bibliotheken wurde sich auf zwei Hauptbibliotheken beschränkt:\par
+	\spacer\textbf{Materialize CSS\cite{materialize}:} Dies ist eine CSS/JS-Bibliothek, welche jegliche Designelemente Googles Material Design Definition zur Verfügung stellt.\par
+	\spacer\textbf{jQuery\cite{jQuery}} ist eine der beliebtesten JavaScript-Bibliothek\cite{jQueryCoverage}, welche viele häufig benötigten JavaScript-Funktionen in einfachere, schnell zu benutztende Funktionen vereint.
+	\spacer Einige kleinere JavaScript Funktionen wurde zusätzlich verwendet um zum Beispiel Hashfunktionen wie md5 auszuführen oder Graphen und Diagramme zu zeichnen.\par
+	\subsection{Struktur}
+	\subsubsection{JavaScript}
+	...
+	\subsubsection{Datenbank}
+	...
+	\subsubsection{Klassen in PHP}
+	...
+	\subsubsection{API}
+	...
+	\subsection{Entwicklungsprozess}
+	Die Reihenfolge der einzelnen Schritte sind in den meisten Fällen persönliche Präferenz. In diesem Fall wird mit der Entwicklung des Clients begonnen, denn dieser soll, da er die eigentliche WebApp widerspiegelt, auch ohne Internetverbindung laufen. Die meiste serverseitige Entwicklung kann somit im Anschluss geschehen.\par
+	\subsubsection{Client Grundlagen}
+	Zunächst werden Grundlagen im JavaScript, also clientseitig gelegt. Ziel einer progressiven WebApp ist es, dass diese nicht nur aussieht, als sei sie eine native App, sondern auch ohne Datenverbindung funktioniert. Hierfür wird der Client an das Prinzip einer Single-Page-Webanwendung\cite{singlePageWiki} angelehnt. Somit wird nur selten die gesamte Seite neugeladen, sondern das Grundgerüst wird zu Beginn einer Sitzung geladen und jeder Inhalt wird von JavaScript mittels DOM-Manipulation dynamisch eingefügt.\par
+	Der erste Schritt wird also mit dem Erstellen der Datei ``index.html'' getan. Diese enthält die sog. App-Shell, welche jenes Grundgerüst darstellt.\par
+	Im Beispiel des Schulplaners ist es jedoch erwünscht die Login- / Registrierungsoberfläche von der ``App'' ansich abzugrenzen. Deshalb erhält die Datei ``index.html'' hier nicht dei App-Shell, sondern die Login-Maske. Für das Grundgerüst wird abweichend ``app.html'' verwendet.\par
+	\spacer Die eigentliche Entwicklung dieses Grundgerüsts unterscheidet sich nicht stark von der einer herkömmlichen HTML- Webseite. Jedoch wird hier nur die Menüführung und Kopfzeile erstellt. Der eigentliche Inhalt wird später mittels JavaScript eingefügt.
+	\subsubsection{Das Manifest}
+	
 	
 	\newpage
 	\section{Anhang}
