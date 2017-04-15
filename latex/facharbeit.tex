@@ -36,6 +36,7 @@ version={3.0},
 \geometry{a4paper, top=25mm, left=30mm, right=30mm, bottom=25mm, headsep=10mm, footskip=12mm}
 
 \newcommand{\spacer}{\par\bigskip\noindent}
+\providecommand{\inlinecode}[1]{\texttt{#1}}
 
 \newcommand\invisiblesection[1]{
 	\refstepcounter{section}
@@ -69,10 +70,10 @@ version={3.0},
 	WebApps wurden von den meisten Benutzern, wenn auch unbewusst, benutzt. Oft fallen diese garnicht auf, da sie intuitiv zu benutzen sind.\par
 	Immer dann, wenn wir eine Webseite benutzten können, ohne dabei die Webseite an sich zu verlassen, oder neuzuladen, handelt es sich um eine WebApp. Einige Beispiele sind die Google Suche, Google's Email Dienst GMail oder auch Facebook.\par
 	Große Firmen stecken oft viel Geld und Ressourcen in die Entwicklung von nativen Apps für die beliebtesten Betriebssysteme, darunter Windows, Android und iOS. WebApps und auch deren Erweiterung progressive WebApps sind jedoch platformunabhängig und können auf jedem Betriebsystem benutzt werden. Somit genügt es eine Anwendung einmal als (progressive) WebApp zu entwickeln.\par
-	Eine progressive WebApp ermöglicht es sogar den Eindruck zu erwecken, dass sie eine native App sei, ohne dabei auf bekannte Features, wie Offline-Modi und Push-Benachrichtigungen zu verzichten
+	Eine progressive WebApp ermöglicht es sogar den Eindruck zu erwecken, dass sie eine native App sei, ohne dabei auf bekannte Features, wie Offline-Modi und Push-Benachrichtigungen zu verzichten.\par
 	Tut mir sehr leid, aber der ``Benutzerprofildienst'' ist heute leider nicht verfügbar.
 	Selbst der ``Gruppenrichtlinienclient'' kann hier leider nichts mehr ausrichten...
-	Versuche es in 42 Minuten erneut.
+	Versuche es in 42 Minuten erneut.\par
 
 	\newpage
 	
@@ -111,7 +112,7 @@ version={3.0},
 	Die aktuellste Version ist PHP7.1. Mit PHP7 kamen, 11 Jahre nach PHP5, vorallem eine verbesserte Performance und sowie einige neue Features dazu.\cite{phpWiki}\par
 	
 	\subsection{Webapp}
-	DIe Funktion einer interaktiven Webseite setzt die Möglichkeit vorraus, dass der Webserver Daten empfangen kann, die der Benutzer eingegeben hat. Bereits in der Ur-Version von HTML war es möglich Werte an den Webserver zu schicken, ähnlich dem heutigen HTTP-GET Verfahren. Eine der ersten Seiten war ``SPIRES-HEP'', ein Webinterface für eine Datenbank der Stanford Universität aus dem Jahr 1991.\par
+	Die Funktion einer interaktiven Webseite setzt die Möglichkeit vorraus, dass der Webserver Daten empfangen kann, die der Benutzer eingegeben hat. Bereits in der Ur-Version von HTML war es möglich Werte an den Webserver zu schicken, ähnlich dem heutigen HTTP-GET Verfahren. Eine der ersten Seiten war ``SPIRES-HEP'', ein Webinterface für eine Datenbank der Stanford Universität aus dem Jahr 1991.\par
 	Die erste von der Öffentlichkeit wahrgenommene Webanwendung war Yahoo, welches ebenfalls an der Stanford Universität von zwei Studenten entwickelt wurde.\par
 	Seit AJAX in JavaScript Einzug erhalten hat, ist es möglich auch dynamisch Teile der angezeigten Webseite zu verändern, oder sogar die Präsentationsschicht komplett auf den Client auszulagern, hierbei sendet während der normalen Benutzung der Server nur noch benötigte Informationen.\cite{webappWiki}\par
 	Aktuell spricht man auch von ``Progressiven Web Apps'', wenn diese nicht nur komplett clientseitig ausgeführt werden können, sondern auch Features wie ein Offline-Modus und Push-Benachritigungen enthalten. Außerdem können diese den Eindruck erwecken, eine native App zu sein, obwohl keine Installation benötigt wird. Leider werden diese bisher nur von Chrome und Firefox unterstützt, andere Browser haben zum Zeitpunkt der Recherche angekündigt progressive WebApps in Zukunft zu unterstützen.\cite{prwebappWiki}\par
@@ -122,8 +123,8 @@ version={3.0},
 	Zur Vorbereitung gehören neben der Einrichtung der Entwicklungsumgebung und des Webservers auch die Sammlung benötigter Bibliotheken.\par
 	Bei der Einrichtung des Webservers wurde ein Ordner für dieses Projekt samt passender Zugriffsrechte und gültigen SSL-Zertifikat erstellt. Dieses Zertifikat ist nicht nur für die Funktionalität von Service Workern, bei welchen eine Verbindung via SSL Pflicht ist, sondern auch für den generellen Datenschutz des Nutzers wichtig.\par
 	Bei den benutzten Bibliotheken wurde sich auf zwei Hauptbibliotheken beschränkt:\par
-	\spacer\textbf{Materialize CSS\cite{materialize}:} Dies ist eine CSS/JS-Bibliothek, welche jegliche Designelemente Googles Material Design Definition zur Verfügung stellt.\par
-	\spacer\textbf{jQuery\cite{jQuery}} ist eine der beliebtesten JavaScript-Bibliothek\cite{jQueryCoverage}, welche viele häufig benötigten JavaScript-Funktionen in einfachere, schnell zu benutztende Funktionen vereint.
+	\spacer\textbf{Materialize CSS\footnote{\inlinecode{Materialize Frontend-Framework}: \url{http://materializecss.com/}}:} Dies ist eine CSS/JS-Bibliothek, welche jegliche Designelemente Googles Material Design Definition zur Verfügung stellt.\par
+	\spacer\textbf{jQuery\footnote{\inlinecode{jQuery JavaScript Library}: \url{https://jquery.com/}}} ist eine der beliebtesten JavaScript-Bibliothek\cite{jQueryCoverage}, welche viele häufig benötigten JavaScript-Funktionen in einfachere, schnell zu benutztende Funktionen vereint.
 	\spacer Einige kleinere JavaScript Funktionen wurde zusätzlich verwendet um zum Beispiel Hashfunktionen wie md5 auszuführen oder Graphen und Diagramme zu zeichnen.\par
 	\subsection{Struktur}
 	\subsubsection{JavaScript}
@@ -136,14 +137,23 @@ version={3.0},
 	...
 	\subsection{Entwicklungsprozess}
 	Die Reihenfolge der einzelnen Schritte sind in den meisten Fällen persönliche Präferenz. In diesem Fall wird mit der Entwicklung des Clients begonnen, denn dieser soll, da er die eigentliche WebApp widerspiegelt, auch ohne Internetverbindung laufen. Die meiste serverseitige Entwicklung kann somit im Anschluss geschehen.\par
+	
 	\subsubsection{Client Grundlagen}
 	Zunächst werden Grundlagen im JavaScript, also clientseitig gelegt. Ziel einer progressiven WebApp ist es, dass diese nicht nur aussieht, als sei sie eine native App, sondern auch ohne Datenverbindung funktioniert. Hierfür wird der Client an das Prinzip einer Single-Page-Webanwendung\cite{singlePageWiki} angelehnt. Somit wird nur selten die gesamte Seite neugeladen, sondern das Grundgerüst wird zu Beginn einer Sitzung geladen und jeder Inhalt wird von JavaScript mittels DOM-Manipulation dynamisch eingefügt.\par
 	Der erste Schritt wird also mit dem Erstellen der Datei ``index.html'' getan. Diese enthält die sog. App-Shell, welche jenes Grundgerüst darstellt.\par
 	Im Beispiel des Schulplaners ist es jedoch erwünscht die Login- / Registrierungsoberfläche von der ``App'' ansich abzugrenzen. Deshalb erhält die Datei ``index.html'' hier nicht dei App-Shell, sondern die Login-Maske. Für das Grundgerüst wird abweichend ``app.html'' verwendet.\par
 	\spacer Die eigentliche Entwicklung dieses Grundgerüsts unterscheidet sich nicht stark von der einer herkömmlichen HTML- Webseite. Jedoch wird hier nur die Menüführung und Kopfzeile erstellt. Der eigentliche Inhalt wird später mittels JavaScript eingefügt.
+	
 	\subsubsection{Das Manifest}
+	Das Manifest ist der Bestandteil einer progressiven WebApp, der es (unter anderem) möglich macht, diese zum Homescreen hinzuzufügen.\par
+	Es besteht aus einer JSON-Datei, welche in jedem HTML-Dokument einer WebApp im \inlinecode{<head>}-Bereich verlinkt sein muss. In dieser Datei werden neben dem Namen, Icons und der Start-URL auch Parameter zur Darstellung wie der Hauptfarbe und der Orientation festgelegt. Der Parameter \inlinecode{"{}display"{}: "{}standalone"{}} macht aus einer normalen Webseite eine ``echte'' WebApp, indem es jegliche UI-Elemente des Browsers verbergt und die Webseite wie eine native App aussehen lässt.\par
 	
-	
+	\subsubsection{Der Service-Worker}
+	Grundlegend ist ein Service-Worker ein JavaScript-Skript, welches vom Browser ``installiert'' wird. Das heißt der Browser speichert das Skript und führt dieses, nicht nur solange eine Seite bzw. Tab offen ist, sondern auch darüber hinaus, aus.\par
+	In Google Chrome zum Beispiel funktionieren Service-Worker, genauso wie einige andere Funktionen, darunter Zugriff auf die Webcam oder den Standort, nur wenn die aufgerufene Seite ein ``secure Origin'' ist, hierbei \emph{muss} die Seite unter anderem vollständig über SSL ausgeliefert werden. Ausnahmen hierfür sind zu Entwicklungszwecken \inlinecode{localhost} und \inlinecode{127.0.0.1}. Außerdem darf pro Webseite nur ein Service-Worker existieren.\par
+	Eine Aufgabe, die dieser Service-Worker erledigt, ist das sogenannte ``Caching'' von Dateien. Hierbei werden alle zur Offline Benutzung benötigten Resourcen in einem ``Cache'' zwischengespeichert. Somit kann die WebApp größtenteils auch offline verwendet werden.\par
+	Da die Entwicklung dieses Teils des Service-Workers oft mit viel reproduktiver Arbeit verbunden ist, haben die Google Chrome Entwickler eine Bibliothek\footnote{\inlinecode{sw-precache} - GitHub: \url{https://github.com/GoogleChrome/sw-precache}} zur Verfügung gestellt. Mit dieser lässt sich nach eingestellten Regeln ein Service-Worker erstellen, der alle benötigten Resourcen ``cachet''. Somit muss auf dem Entwicklungsrechner lediglich ein lokales Skript ausgeführt werden, welches alle zu cachenden Dateien im Service-Worker verlinkt.\par
+	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Benachrichtigungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert, und erhält ab dann Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls zum Beispiel jene den Benutzer stören.\par
 	\newpage
 	\section{Anhang}
 	\subsection{Literaturverzeichnis}
@@ -153,8 +163,14 @@ version={3.0},
 	To follow
 	
 	\newpage
-	\section{Erklärung über die selbständige Anfertigung der Arbeit}
-	Hiermit erkläre ich, Yannick F\'{e}lix, dass ich diese Arbeit über den Zeitraum von 12 Wochen selbst angefertigt habe.
+	\section{Erklärung über die selbstständige Anfertigung der Arbeit}
+	Hiermit erkläre ich, dass ich die vorliegende Hausarbeit selbständig verfasst und keine anderen als die angegebenen Hilfsmittel benutzt habe.
+	Die Stellen der Hausarbeit, die anderen Quellen im Wortlaut oder dem Sinn nach entnommen wurden, sind durch Angaben der Herkunft kenntlich gemacht. Dies gilt auch für Zeichnungen, Skizzen, bildliche Darstellungen sowie für Quellen aus dem Internet.\par
+	\vspace{0.5cm}
+	\noindent Mainz, den 24. April 2017\par
+	\vspace{2cm}
+	\noindent Yannick F\'{e}lix
+	\vfill
 	\doclicenseThis
 
 \end{document}               % End of document.
