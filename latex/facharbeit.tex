@@ -1,6 +1,8 @@
 % !TeX encoding = UTF-8
 
 \documentclass[a4paper,12pt]{scrartcl}      % Specifies the document class
+\usepackage{minted}
+\usemintedstyle{rainbow_dash}
 \usepackage{german}
 \usepackage{hyperref}
 \usepackage[
@@ -17,9 +19,6 @@ version={3.0},
 \usepackage[nottoc]{tocbibind}
 \addbibresource{literatur.bib}
 
-\let\oldcite\cite
-\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
-
 % Deutsche Umlaute
 \usepackage[utf8]{inputenc}
 
@@ -34,6 +33,9 @@ version={3.0},
 
 \usepackage{geometry}
 \geometry{a4paper, top=25mm, left=30mm, right=30mm, bottom=25mm, headsep=10mm, footskip=12mm}
+
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\textsuperscript{\oldcite{#1}}}
 
 \newcommand{\spacer}{\par\bigskip\noindent}
 \providecommand{\inlinecode}[1]{\texttt{#1}}
@@ -154,6 +156,19 @@ version={3.0},
 	Eine Aufgabe, die dieser Service-Worker erledigt, ist das sogenannte ``Caching'' von Dateien. Hierbei werden alle zur Offline Benutzung benötigten Resourcen in einem ``Cache'' zwischengespeichert. Somit kann die WebApp größtenteils auch offline verwendet werden.\par
 	Da die Entwicklung dieses Teils des Service-Workers oft mit viel reproduktiver Arbeit verbunden ist, haben die Google Chrome Entwickler eine Bibliothek\footnote{\inlinecode{sw-precache} - GitHub: \url{https://github.com/GoogleChrome/sw-precache}} zur Verfügung gestellt. Mit dieser lässt sich nach eingestellten Regeln ein Service-Worker erstellen, der alle benötigten Resourcen ``cachet''. Somit muss auf dem Entwicklungsrechner lediglich ein lokales Skript ausgeführt werden, welches alle zu cachenden Dateien im Service-Worker verlinkt.\par
 	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Benachrichtigungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert, und erhält ab dann Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls zum Beispiel jene den Benutzer stören.\par
+	
+	\subsubsection{View-Klasse: Account Einstellungen}
+	Durch ECMA-Script 2015 und 2016, kurz ECMA-Script 6 oder ES6, ist es möglich ``echte'' Klassen in JS zu schreiben. Diese werden ähnlich zu anderen Programmiersprachen so definiert:\par
+	\begin{minted}{js}
+class Rectangle {
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+}
+	\end{minted}
+	Als ersten Teil wird sich nun die ``Account Einstellungen''-Seite vorgenommen, hier kann später neben Änderungen am Passwort und der Email-Adresse und anderen Optionen auch die Erlaubnis zum Senden bzw. Empfangen von Push-Benachrichtigungen gegeben, oder auch zurückgezogen werden.\par
+	Um eine gute Struktur im JS zu behalten, wird sich an den zuvor erklärten ES6-Klassen bedient. Für jeden ``View'', also jede Unterseite, wird eine eigene ``View-Klasse'' erstellt. Diese beinhaltet, im Gegensatz zu Standart-Klassen, keine Daten, sondern beherbergt Methoden und Eigenschaften der Darstellung dieser Unterseite
 	\newpage
 	\section{Anhang}
 	\subsection{Literaturverzeichnis}
