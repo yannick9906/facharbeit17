@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 
-\documentclass[a4paper,12pt]{scrartcl}      % Specifies the document class
+\documentclass[a4paper,12pt,ngerman]{scrartcl}      % Specifies the document class
 \usepackage{minted}
 \usemintedstyle{rainbow_dash}
 \usepackage{german}
@@ -124,9 +124,11 @@ version={3.0},
 	\subsection{Vorbereitung}
 	Zur Vorbereitung gehören neben der Einrichtung der Entwicklungsumgebung und des Webservers auch die Sammlung benötigter Bibliotheken.\par
 	Bei der Einrichtung des Webservers wurde ein Ordner für dieses Projekt samt passender Zugriffsrechte und gültigen SSL-Zertifikat erstellt. Dieses Zertifikat ist nicht nur für die Funktionalität von Service Workern, bei welchen eine Verbindung via SSL Pflicht ist, sondern auch für den generellen Datenschutz des Nutzers wichtig.\par
-	Bei den benutzten Bibliotheken wurde sich auf zwei Hauptbibliotheken beschränkt:\par
-	\spacer\textbf{Materialize CSS\footnote{\inlinecode{Materialize Frontend-Framework}: \url{http://materializecss.com/}}:} Dies ist eine CSS/JS-Bibliothek, welche jegliche Designelemente Googles Material Design Definition zur Verfügung stellt.\par
-	\spacer\textbf{jQuery\footnote{\inlinecode{jQuery JavaScript Library}: \url{https://jquery.com/}}} ist eine der beliebtesten JavaScript-Bibliothek\cite{jQueryCoverage}, welche viele häufig benötigten JavaScript-Funktionen in einfachere, schnell zu benutztende Funktionen vereint.
+	Als einfachste Serversoftware ist hier Caddyserver\footnote{\inlinecode{Caddyserver} - The HTTP/2 web server with automatic HTTPS: \url{https://caddyserver.com/}} von Vorteil. Dieser bietet nicht nur einfach Erweiterbarkeit, wie zum Beispiel für PHP, und gute Performance, sondern unterstützt schon das neue Protokoll HTTP/2 und kann automatisch SSL-Zertifikate für die eingerichteten Domains austellen lassen.\par
+	\noindent Da eine Entwicklung ohne jegliche Bibliotheken viel zu lang dauern würde und nicht praktikabel ist wurden auch hier einige Bibliotheken verwendet:\par
+	\spacer\textbf{Materialize CSS\footnote{\inlinecode{Materialize Frontend-Framework}: \url{http://materializecss.com/}}:} Dies ist eine CSS/JS-Bibliothek, welche jegliche Designelemente Googles Material Design Definition zur Verfügung stellt. Somit lassen sich ohne viel Aufwand, mittels HTML und passenden CSS-Klassen responsive Webseiten erstellen.\par
+	\spacer\textbf{jQuery\footnote{\inlinecode{jQuery JavaScript Library}: \url{https://jquery.com/}}} ist eine der beliebtesten JavaScript-Bibliothek\cite{jQueryCoverage}, welche viele häufig benötigten JavaScript-Funktionen in einfachere, schnell zu benutztende Funktionen vereint.\par
+	\spacer\textbf{Dexie.js\footnote{\inlinecode{dexie.js}: \url{http://dexie.org/}}:} Um auf eine der beliebtesten Web Datenbanken, IndexedDB zuzugreifen bietet dexie.js einfache, objektorientierte Methoden und Klassen.\par
 	\spacer Einige kleinere JavaScript Funktionen wurde zusätzlich verwendet um zum Beispiel Hashfunktionen wie md5 auszuführen oder Graphen und Diagramme zu zeichnen.\par
 	\subsection{Struktur}
 	\subsubsection{JavaScript}
@@ -144,7 +146,7 @@ version={3.0},
 	Zunächst werden Grundlagen im JavaScript, also clientseitig gelegt. Ziel einer progressiven WebApp ist es, dass diese nicht nur aussieht, als sei sie eine native App, sondern auch ohne Datenverbindung funktioniert. Hierfür wird der Client an das Prinzip einer Single-Page-Webanwendung\cite{singlePageWiki} angelehnt. Somit wird nur selten die gesamte Seite neugeladen, sondern das Grundgerüst wird zu Beginn einer Sitzung geladen und jeder Inhalt wird von JavaScript mittels DOM-Manipulation dynamisch eingefügt.\par
 	Der erste Schritt wird also mit dem Erstellen der Datei ``index.html'' getan. Diese enthält die sog. App-Shell, welche jenes Grundgerüst darstellt.\par
 	Im Beispiel des Schulplaners ist es jedoch erwünscht die Login- / Registrierungsoberfläche von der ``App'' ansich abzugrenzen. Deshalb erhält die Datei ``index.html'' hier nicht dei App-Shell, sondern die Login-Maske. Für das Grundgerüst wird abweichend ``app.html'' verwendet.\par
-	\spacer Die eigentliche Entwicklung dieses Grundgerüsts unterscheidet sich nicht stark von der einer herkömmlichen HTML- Webseite. Jedoch wird hier nur die Menüführung und Kopfzeile erstellt. Der eigentliche Inhalt wird später mittels JavaScript eingefügt.
+	\spacer Die eigentliche Entwicklung dieses Grundgerüsts unterscheidet sich nicht stark von der einer herkömmlichen HTML- Webseite. Jedoch wird hier nur die Me\-nü\-füh\-rung und Kopfzeile erstellt. Der eigentliche Inhalt wird später mittels JavaScript eingefügt.
 	
 	\subsubsection{Das Manifest}
 	Das Manifest ist der Bestandteil einer progressiven WebApp, der es (unter anderem) möglich macht, diese zum Homescreen hinzuzufügen.\par
@@ -155,7 +157,7 @@ version={3.0},
 	In Google Chrome zum Beispiel funktionieren Service-Worker, genauso wie einige andere Funktionen, darunter Zugriff auf die Webcam oder den Standort, nur wenn die aufgerufene Seite ein ``secure Origin'' ist, hierbei \emph{muss} die Seite unter anderem vollständig über SSL ausgeliefert werden. Ausnahmen hierfür sind zu Entwicklungszwecken \inlinecode{localhost} und \inlinecode{127.0.0.1}. Außerdem darf pro Webseite nur ein Service-Worker existieren.\par
 	Eine Aufgabe, die dieser Service-Worker erledigt, ist das sogenannte ``Caching'' von Dateien. Hierbei werden alle zur Offline Benutzung benötigten Resourcen in einem ``Cache'' zwischengespeichert. Somit kann die WebApp größtenteils auch offline verwendet werden.\par
 	Da die Entwicklung dieses Teils des Service-Workers oft mit viel reproduktiver Arbeit verbunden ist, haben die Google Chrome Entwickler eine Bibliothek\footnote{\inlinecode{sw-precache} - GitHub: \url{https://github.com/GoogleChrome/sw-precache}} zur Verfügung gestellt. Mit dieser lässt sich nach eingestellten Regeln ein Service-Worker erstellen, der alle benötigten Resourcen ``cachet''. Somit muss auf dem Entwicklungsrechner lediglich ein lokales Skript ausgeführt werden, welches alle zu cachenden Dateien im Service-Worker verlinkt.\par
-	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Benachrichtigungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert, und erhält ab dann Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls zum Beispiel jene den Benutzer stören.\par
+	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Be\-nach\-rich\-ti\-gungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert, und erhält ab dann Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls zum Beispiel jene den Benutzer stören.\par
 	
 	\subsubsection{View-Klasse: Account Einstellungen}
 	Durch ECMA-Script 2015 und 2016, kurz ECMA-Script 6 oder ES6, ist es möglich ``echte'' Klassen in JS zu schreiben. Diese werden ähnlich zu anderen Programmiersprachen so definiert:\par
@@ -167,8 +169,12 @@ class Rectangle {
     }
 }
 	\end{minted}
-	Als ersten Teil wird sich nun die ``Account Einstellungen''-Seite vorgenommen, hier kann später neben Änderungen am Passwort und der Email-Adresse und anderen Optionen auch die Erlaubnis zum Senden bzw. Empfangen von Push-Benachrichtigungen gegeben, oder auch zurückgezogen werden.\par
-	Um eine gute Struktur im JS zu behalten, wird sich an den zuvor erklärten ES6-Klassen bedient. Für jeden ``View'', also jede Unterseite, wird eine eigene ``View-Klasse'' erstellt. Diese beinhaltet, im Gegensatz zu Standart-Klassen, keine Daten, sondern beherbergt Methoden und Eigenschaften der Darstellung dieser Unterseite
+	Als ersten Teil wird sich nun die ``Account Einstellungen''-Seite vorgenommen, hier kann später neben Änderungen am Passwort und der Email-Adresse und anderen Optionen auch die Erlaubnis zum Senden bzw. Empfangen von Push-Be\-nach\-rich\-ti\-gungen gegeben, oder auch zurückgezogen werden.\par
+	Um eine gute Struktur im JS zu behalten, wird sich an den zuvor erklärten ES6-Klassen bedient. Für jeden ``View'', also jede Unterseite, wird eine eigene ``View-Klasse'' erstellt. Diese beinhaltet, im Gegensatz zu Standart-Klassen, keine Daten, sondern beherbergt Methoden und Eigenschaften der Darstellung dieser Unterseite.\par
+	Im Konstruktur werden alle Daten gesammelt die schon vor dem Ausführen der Unterseite benötigt werden. Hierzu gehört unter anderem das Kompilieren der Handlebars-Templates. Diese sind eine HTML-Blaupause und können später mit Daten gefüllt werden und mittels DOM-Manipulation angezeigt werden.\par
+	
+	\subsubsection{Synchronisierung mit dem Server}
+	Um Offline-Funktionalität gewehrleisten zu können, werden alle Aktionen die der Benutzer in der WebApp ausführt zunächst in der lokalen Datenbank ausgeführt. Außerdem wird gespeichert, welche Aktion der Benutzer in welcher Reihenfolge getan hat. Diese Aktionen werden daraufhin, beziehungsweise sobald der Benutzer wieder mit dem Internet verbunden ist, an den Server gesendet um auf der serverseitigen Datenbank ausgeführt zu werden. Der Server sendet nach erfolgreicher Ausführung die aktuellen Daten an den Client zurück. Dieser ersetzt die alten Daten in der lokalen Datenbank durch die neuen vom Server.\par
 	\newpage
 	\section{Anhang}
 	\subsection{Literaturverzeichnis}
@@ -180,7 +186,7 @@ class Rectangle {
 	\newpage
 	\section{Erklärung über die selbstständige Anfertigung der Arbeit}
 	Hiermit erkläre ich, dass ich die vorliegende Hausarbeit selbständig verfasst und keine anderen als die angegebenen Hilfsmittel benutzt habe.
-	Die Stellen der Hausarbeit, die anderen Quellen im Wortlaut oder dem Sinn nach entnommen wurden, sind durch Angaben der Herkunft kenntlich gemacht. Dies gilt auch für Zeichnungen, Skizzen, bildliche Darstellungen sowie für Quellen aus dem Internet.\par
+	Die Stellen der Hausarbeit, die anderen Quellen im Wortlaut oder dem Sinn nach entnommen wurden, sind durch Angaben der Herkunft kenntlich gemacht. Dies gilt auch für Zeichnungen, Skizzen, bildliche Darstellungen sowie für Quellen aus dem Internet.\cite{erklaerung}\par
 	\vspace{0.5cm}
 	\noindent Mainz, den 24. April 2017\par
 	\vspace{2cm}
