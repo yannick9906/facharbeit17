@@ -27,29 +27,31 @@ $(document).ready(function() {
     // Initialize collapsible (uncomment the line below if you use the dropdown variation)
     $('.collapsible').collapsible();
 
-    //Register Service Workers if not already:
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-        console.log('Service Worker and Push is supported');
+    User.getCurrentUser((user) => {
+        vw_Account = new view_Account(user, user.dataChanged, user.push);
 
-        navigator.serviceWorker.register('sw-cache.js')
-            .then(function(swReg) {
-                console.log('Cache Service Worker is registered', swReg);
+        //Register Service Workers if not already:
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            console.log('Service Worker and Push is supported');
 
-                swRegistration = swReg;
-                initStep2(true);
-            })
-            .catch(function(error) {
-                console.error('Service Worker Error', error);
-                initStep2(false);
-            });
-    } else {
-        console.warn('Push messaging is not supported');
-        initStep2(false);
-    }
+            navigator.serviceWorker.register('sw-cache.js')
+                .then(function(swReg) {
+                    console.log('Cache Service Worker is registered', swReg);
+
+                    swRegistration = swReg;
+                    initStep2(true);
+                })
+                .catch(function(error) {
+                    console.error('Service Worker Error', error);
+                    initStep2(false);
+                });
+        } else {
+            console.warn('Push messaging is not supported');
+            initStep2(false);
+        }
+    });
 });
 
 function initStep2(support) {
-    if(support) vw_Account = new view_Account(swRegistration);
-    else vw_Account = new view_Account(false);
     vw_Account.showView();
 }
