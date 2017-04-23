@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>School-Life</title>
+    <title>Yannicks 3D Drucke</title>
 
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono" />
 
     <link type="text/css" rel="stylesheet" href="libs/materialize/css/materialize.css"  media="screen,projection" />
@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#009688" />
+    <meta name="theme-color" content="#ff9800" />
 </head>
 <body>
     <script type="text/javascript" src="libs/jquery-2.2.1.min.js"></script>
@@ -26,10 +26,10 @@
     <script type="text/javascript" src="libs/dexie.min.js"></script>
 
     <div class="navbar-fixed">
-        <nav class="teal">
+        <nav class="orange">
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo hide-on-med-and-down white-text text-darken-2" style="padding-left: 310px;">School Life</a>
-                <a href="#!" class="brand-logo hide-on-large-only white-text">School Life</a>
+                <a href="#!" class="brand-logo hide-on-med-and-down white-text text-darken-2" style="padding-left: 310px;">Yannicks 3D Drucke</a>
+                <a href="#!" class="brand-logo hide-on-large-only white-text">3D Drucke</a>
                 <ul id="slide-out" class="side-nav fixed">
                     <li><div class="userView">
                         <img class="background" src="img/sidenav.png" width="300px" style="margin-top: -56px" />
@@ -37,22 +37,14 @@
                         <a href="#!"><span id="nav-username" class="white-text name" style="text-shadow: 1px 1px 5px black;">Your Name Here</span></a>
                         <a href="#!"><span id="nav-usermail" class="white-text email" style="text-shadow: 1px 1px 5px black;" id="projectname">your@email.here</span></a>
                     </div></li>
-                    <li id="nav-dashboard"><a ><i class="mddi mddi-view-dashboard"></i>Dashboard</a></li>
                     <li id="nav-account"><a ><i class="mddi mddi-account-settings-variant"></i>Account</a></li>
                     <li id="nav-logout"><a ><i class="mddi mddi-logout-variant"></i>Logout</a></li>
                     <li><div class="divider"></div></li>
-                    <li class="subheader"><a class="subheader teal-text  bolden">Planer</a></li>
-                    <li id="nav-tasks"><a ><i class="mddi mddi-playlist-check"></i>Aufgaben</a></li>
-                    <li id="nav-exams"><a ><i class="mddi mddi-comment-question-outline"></i>Tests</a></li>
-                    <li id="nav-grades"><a ><i class="mddi mddi-chart-histogram"></i>Noten</a></li>
+                    <li class="subheader"><a class="subheader orange-text  bolden">Meine Bestellungen</a></li>
+                    <li id="nav-tasks"><a ><i class="mddi mddi-basket"></i>aktive Bestellungen</a></li>
+                    <li id="nav-exams"><a class="condensed" style="font-weight: 700;"><i class="mddi mddi-gift"></i>abgeschlossene Bestellungen</a></li>
                     <li><div class="divider"></div></li>
-                    <li><a class="subheader teal-text bolden">Stundenplan</a></li>
-                    <li id="nav-changes"><a ><i class="mddi mddi-swap-horizontal"></i>Änderungen</a></li>
-                    <li id="nav-calendar"><a ><i class="mddi mddi-timetable"></i>Kalender</a></li>
-                    <li id="nav-classes"><a ><i class="mddi mddi-folder"></i>Fächer</a></li>
-                    <li id="nav-holidays"><a ><i class="mddi mddi-beach"></i>Ferien</a></li>
-                    <li><div class="divider"></div></li>
-                    <li><a class="subheader teal-text bolden">Administration</a></li>
+                    <li><a class="subheader orange-text bolden">Administration</a></li>
                     <li id="nav-database"><a href="adminer/"><i class="mddi mddi-database"></i>Datenbank</a></li>
                     <li><div class="divider"></div></li>
                 </ul>
@@ -64,7 +56,10 @@
             <!-- here goes all content generates by JS -->
         </div>
     </div>
-    <script src="js/view-account.js"></script>
+    <script src="js/viewAccount.js"></script>
+    <script src="js/viewNewList.js"></script>
+    <script src="js/viewOldList.js"></script>
+    <script src="js/user.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

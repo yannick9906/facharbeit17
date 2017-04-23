@@ -71,7 +71,7 @@ header, #main, footer {
 }
 
 .bolden {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .clickable {
@@ -221,4 +221,9 @@ header, #main, footer {
 .link {
     background-color: #4CAF50;
     color: white;
+}
+
+.condensed {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight:700;
 }
