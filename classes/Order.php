@@ -70,7 +70,7 @@
             $this->total_cost = $this->energy_cost + $this->material_cost + $this->cost;
             $this->order_livestream = $order_livestream;
             $this->order_pic = $order_pic;
-            $this->pdo = new PDO_MYSQL();
+            $this->pdo = new PDO_Mysql();
         }
 
         /**
@@ -79,7 +79,7 @@
          * @return Order
          */
         public static function fromOID($oid) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $res = $pdo->query("SELECT * FROM print3d_orders WHERE oID = :oid",[":oid" => $oid]);
             return new Order($res->oID, $res->uID, $res->filamenttype, $res->date_created, $res->date_confirmed, $res->date_completed, $res->state, $res->comment, $res->precision, $res->order_name, $res->order_link, $res->material_length, $res->material_weight, $res->print_time, $res->fixprice, $res->order_livestream, $res->order_pic);
         }
@@ -89,7 +89,7 @@
          * @return Order[]
          */
         public static function getAllOrders() {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT oID FROM print3d_orders ORDER BY date_created DESC");
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\Order::fromOID");
         }
@@ -100,7 +100,7 @@
          * @return Order[]
          */
         public static function getAllOrdersPerUser($user) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT oID FROM print3d_orders WHERE uID = :uid AND state BETWEEN 0 AND 5 ORDER BY date_created DESC", [":uid" => $user->getUID()]);
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\Order::fromOID");
         }
@@ -112,7 +112,7 @@
          * TODO
          */
         public static function getAllOldOrdersPerUser($user) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT oID FROM print3d_orders WHERE uID = :uid AND state NOT BETWEEN 0 AND 5 ORDER BY date_created DESC", [":uid" => $user->getUID()]);
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\Order::fromOID");
         }
@@ -121,7 +121,7 @@
          * @return Order[]
          */
         public static function getAllOpenOrders() {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT oID FROM print3d_orders WHERE state BETWEEN 0 AND 5 ORDER BY date_created DESC");
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\Order::fromOID");
         }
@@ -136,7 +136,7 @@
          * @param $comment
          */
         public static function createNew($user, $title, $fID, $url, $comment) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $pdo->queryInsert("print3d_orders", [
                 "uID" => $user->getUID(),
                 "date_created" => date("Y-m-d H:i:s"),
@@ -271,8 +271,8 @@
          * @param int  $state
          */
         public function setState($state) {
-            $this->sendEmails($this->state, $state);
             $this->state = $state;
+            $this->sendEmails($this->state, $state);
         }
 
         /**
@@ -501,4 +501,13 @@
                 "order_pic" => $this->order_pic
             ];
         }
+
+        /*
+         * Hallo Frau Gwinner, Herr Niendorf, oder wer auch immer dies ließt...
+         * Falls Sie tatsächlich diesen schönen Text lesen, sprechen Sie mich
+         * doch mal darauf an.
+         *
+         * Möge die 42 mit dem Benutzerprofildienst sein.
+         * ~Yannick Félix, 24. April 2017 23:59
+         */
     }

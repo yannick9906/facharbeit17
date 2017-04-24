@@ -12,6 +12,7 @@ class User {
     }
 
     static getCurrentUser(callback) {
+
         let db = new Dexie("userData");
         db.version(1).stores({users:'id,uid,username,realname,email,recvmail'});
         db.users.get(1).then((currentUserData) => {

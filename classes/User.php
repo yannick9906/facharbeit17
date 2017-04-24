@@ -40,7 +40,7 @@
             $this->role = $role;
             $this->emails = $emails == 1;
             $this->endpoints = json_decode($endpoints);
-            $this->pdo = new PDO_MYSQL();
+            $this->pdo = new PDO_Mysql();
         }
 
         /**
@@ -50,7 +50,7 @@
          * @return User
          */
         public static function fromUID($uID) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $res = $pdo->query("SELECT * FROM print3d_user WHERE uID = :uid", [":uid" => $uID]);
             return new User($res->uID, $res->username, $res->passwd, $res->email, $res->realname, $res->level, $res->emails, $res->pushkey);
         }
@@ -62,7 +62,7 @@
          * @return User
          */
         public static function fromUName($name) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $res = $pdo->query("SELECT * FROM print3d_user WHERE username = :uname", [":uname" => $name]);
             return new User($res->uID, $res->username, $res->passwd, $res->email, $res->realname, $res->level, $res->emails, $res->pushkey);
         }
@@ -74,7 +74,7 @@
          * @return bool
          */
         public static function doesUserNameExist($uName) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $res = $pdo->query("SELECT * FROM print3d_user WHERE username = :uname", [":uname" => $uName]);
             return isset($res->uID);
         }
@@ -84,7 +84,7 @@
          * @return User[]
          */
         public static function getAllUsers() {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti('SELECT uID FROM print3d_user ');
             return $stmt->fetchAll(PDO::FETCH_FUNC, "\\print3d\\User::fromUID");
         }
@@ -124,7 +124,7 @@
          * @return User The new User as an Object
          */
         public static function createUser($username, $email, $passwdhash, $realname) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $pdo->queryInsert("print3d_user", [
                 "username" => $username,
                 "email" => $email,
@@ -184,7 +184,7 @@
          * @param string $hash
          * @return bool
          */
-        public function comparePassWDHash($hash) {
+        public function comparePassHash($hash) {
             return $hash == $this->passwdHash;
         }
 

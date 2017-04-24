@@ -37,12 +37,12 @@
                         <a href="#!"><span id="nav-username" class="white-text name" style="text-shadow: 1px 1px 5px black;">Your Name Here</span></a>
                         <a href="#!"><span id="nav-usermail" class="white-text email" style="text-shadow: 1px 1px 5px black;" id="projectname">your@email.here</span></a>
                     </div></li>
-                    <li id="nav-account"><a ><i class="mddi mddi-account-settings-variant"></i>Account</a></li>
-                    <li id="nav-logout"><a ><i class="mddi mddi-logout-variant"></i>Logout</a></li>
+                    <li id="nav-account"><a href="#!" onclick="setView('settings')"><i class="mddi mddi-account-settings-variant"></i>Account</a></li>
+                    <li id="nav-logout"><a href="#!" onclick="logout()"><i class="mddi mddi-logout-variant"></i>Logout</a></li>
                     <li><div class="divider"></div></li>
                     <li class="subheader"><a class="subheader orange-text  bolden">Meine Bestellungen</a></li>
-                    <li id="nav-tasks"><a ><i class="mddi mddi-basket"></i>aktive Bestellungen</a></li>
-                    <li id="nav-exams"><a class="condensed" style="font-weight: 700;"><i class="mddi mddi-gift"></i>abgeschlossene Bestellungen</a></li>
+                    <li id="nav-tasks"><a href="#!" onclick="setView('new')"><i class="mddi mddi-basket"></i>aktive Bestellungen</a></li>
+                    <li id="nav-exams"><a href="#!" onclick="setView('old')" class="condensed" style="font-weight: 700;"><i class="mddi mddi-gift"></i>abgeschlossene Bestellungen</a></li>
                     <li><div class="divider"></div></li>
                     <li><a class="subheader orange-text bolden">Administration</a></li>
                     <li id="nav-database"><a href="adminer/"><i class="mddi mddi-database"></i>Datenbank</a></li>
@@ -60,6 +60,8 @@
     <script src="js/viewNewList.js"></script>
     <script src="js/viewOldList.js"></script>
     <script src="js/user.js"></script>
+    <script src="js/filamentType.js"></script>
+    <script src="js/order.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

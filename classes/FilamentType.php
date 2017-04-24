@@ -39,7 +39,7 @@
             if($saleprice == null) $this->saleprice = 0;
             else $this->saleprice = $saleprice;
             $this->available = $available == 1;
-            $this->pdo = new PDO_MYSQL();
+            $this->pdo = new PDO_Mysql();
         }
 
         /**
@@ -49,7 +49,7 @@
          * @return FilamentType
          */
         public static function fromFID($fID) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $res = $pdo->query("SELECT * FROM print3d_filamenttypes WHERE fID = :fid", [":fid" => $fID]);
             return new FilamentType($res->fID, $res->diameter, $res->colorname, $res->colorcode, $res->price, $res->salesprice, $res->available);
         }
@@ -60,7 +60,7 @@
          * @return FilamentType[]
          */
         public static function getAllFilaments() {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT fID FROM print3d_filamenttypes ORDER BY available DESC, colorname");
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\FilamentType::fromFID");
         }
@@ -71,7 +71,7 @@
          * @return FilamentType[]
          */
         public static function getAllAvailableFilaments() {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $stmt = $pdo->queryMulti("SELECT fID FROM print3d_filamenttypes WHERE available = 1");
             return $stmt->fetchAll(\PDO::FETCH_FUNC, "\\print3d\\FilamentType::fromFID");
         }
@@ -87,7 +87,7 @@
          * @param int    $diameter
          */
         public static function createNew($colorname, $colorcode, $price, $saleprice, $active, $diameter) {
-            $pdo = new PDO_MYSQL();
+            $pdo = new PDO_Mysql();
             $pdo->queryInsert("print3d_filamenttypes", [
                 "diameter" => $diameter,
                 "colorname" => $colorname,

@@ -3,6 +3,7 @@
  */
 let swRegistration;
 let vw_Account;
+let vw_newList;
 
 function urlB64ToUint8Array(base64String) {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -29,6 +30,7 @@ $(document).ready(function() {
 
     User.getCurrentUser((user) => {
         vw_Account = new view_Account(user, user.dataChanged, user.push);
+        vw_newList = new view_NewList(() => {}, () => {});
 
         //Register Service Workers if not already:
         if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -53,5 +55,17 @@ $(document).ready(function() {
 });
 
 function initStep2(support) {
-    vw_Account.showView();
+    //vw_Account.showView();
+    vw_newList.showView();
+}
+
+function setView(view) {
+    if(view == "new") {
+        vw_newList.showView();
+        //Set Data
+    } else if(view == "old") {
+
+    } else if(view == "settings") {
+        vw_Account.showView();
+    }
 }

@@ -14,7 +14,7 @@
     use PDO;
     require_once 'passwd.php'; //DB Passwords
 
-    class PDO_MYSQL {
+    class PDO_Mysql {
         /**
          * Define global vars
          *
