@@ -1,21 +1,33 @@
 {
-  "short_name": "School Life",
-  "name": "Schoollife - Schulplaner",
+  "manifest_version": 2,
+
+  "name": "Yannicks 3D Drucke",
+  "short_name": "3D Print",
+  "description": "Yannicks 3D Drucke",
+  "version": "4.0.0fa",
   "icons": [
     {
-      "src": "img/launcher-icon-192.png",
+      "src": "img/launcher-icon-256.png",
+      "sizes": "256x256",
       "type": "image/png",
-      "sizes": "192x192"
+      "density": "1.0"
     },
     {
-      "src": "img/launcher-icon-256.png",
+      "src": "img/launcher-icon-196.png",
+      "sizes": "196x196",
       "type": "image/png",
-      "sizes": "256x256"
+      "density": "1.0"
     }
   ],
-  "background_color": "#009688",
-  "orientation": "portrait",
-  "theme_color": "#009688",
+  "start_url": "appLogin.php",
   "display": "standalone",
-  "start_url": "appLogin.html"
+  "orientation": "portrait",
+  "default-locale": "de",
+  "developer": "Yannick F&#233;lix",
+  "theme_color": "#ff9800",
+  "background_color": "#ff9800",
+  "chrome": { "navigation": false },
+  "permissions": [
+    "notifications"
+  ]
 }
