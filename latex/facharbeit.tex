@@ -28,6 +28,7 @@ version={3.0},
 \usepackage[sfdefault]{roboto}
 
 \definecolor{myGreen}{HTML}{009688}
+\definecolor{white}{HTML}{FFFFFF}
 \chapterfont{\color{myGreen}}  % sets colour of chapters
 \sectionfont{\color{myGreen}}  % sets colour of sections
 
@@ -57,6 +58,10 @@ version={3.0},
 		\vspace{1cm}
 		{\Large\itshape von einer herkömmlichen Website zu einer progressiven WebApp\par}
 		\vfill
+		{
+			\includegraphics[width=5cm]{schlossLogo}\par
+		}
+		\vfill
 		von\par
 		Yannick \textsc{F\'elix}\par
 		{\small 12INF2 - Katharina Gwinner}
@@ -67,16 +72,17 @@ version={3.0},
 		{\large 13. Januar 2017 - 25. April 2017 \par}
 		\newpage
 	\end{titlepage}
-	
+	%{\textcolor{white}{...}}
 	\setcounter{page}{1}
+	%\newpage
 	\section{Kurzfassung}
-	WebApps wurden von den meisten Benutzern, wenn auch unbewusst, schon benutzt. Oft fallen diese garnicht auf, da sie intuitiv zu benutzen sind.\par
-	Immer dann, wenn wir eine Webseite benutzten können, ohne dabei die Webseite an sich zu verlassen oder neuzuladen, handelt es sich um eine WebApp. Einige Beispiele wären die Google Suche, Google's Email Dienst GMail oder auch Facebook.\par
-	Große Firmen stecken oft viel Geld und Ressourcen in die Entwicklung von nativen Apps für die beliebtesten Betriebssysteme, darunter Windows, Android und iOS. WebApps und auch deren Erweiterung progressive WebApps sind jedoch platformunabhängig und sollen in Zukunft auf jedem Betriebssystem benutzt werden können. Somit genügt es eine Anwendung einmal als (progressive) WebApp zu entwickeln.\par
+	WebApps wurden von den meisten Benutzern, wenn auch unbewusst, schon benutzt. Oft fallen diese gar nicht auf, da sie intuitiv zu benutzen sind.\par
+	Immer dann, wenn wir eine Webseite benutzten können, ohne dabei die Webseite an sich zu verlassen oder neuzuladen, handelt es sich um eine WebApp. Einige Beispiele wären die Google Suche, Googles Email Dienst GMail oder auch Facebook.\par
+	Große Firmen stecken oft viel Geld und Ressourcen in die Entwicklung von nativen Apps für die beliebtesten Betriebssysteme, darunter Windows, Android und iOS. WebApps und auch deren Erweiterung ``Progressive WebApps'' sind jedoch plattformunabhängig und sollen in Zukunft auf jedem Betriebssystem benutzt werden können. Somit genügt es eine Anwendung einmal als (progressive) WebApp zu entwickeln.\par
 	Eine progressive WebApp ermöglicht es sogar den Eindruck zu erwecken, dass sie eine native App sei, ohne dabei auf bekannte Features, wie einen Offline-Modus und Push-Be\-nach\-rich\-ti\-gungen zu verzichten, obwohl sie in Wahrheit eine eher normale Webseite darstellt.\par
-	Einige Nachteile sind zur Zeit die fehlende Unterstützung unter Apples Betriebssystem iOS und dessen Browser Safari, als auch die oft eher schlechte Umsetzung einer WebApp, durch fehlender Funktion der Navigationsbuttons des Browsers oder der URL-Leiste.\par
-	Anhand einer Beispiel WebApp, einer simplen Online-Shop Anwendung, wird der Entwicklungsprozess von einer ``normalen'' Website zu einer progressiven Web\-App dargelegt, sowie deren Verwendung von modernen Webtechnologien.\par
-	Vorallem spielen hier Googles vorrangetriebene Entwicklung von sogenannten Service-Workern eine große Rolle, welche die wichtigsten Funktionen und Merkmale einer progressiven WebApp möglich machen.\par
+	Einige Nachteile sind zur Zeit, sowohl die fehlende Unterstützung unter Apples Betriebssystem iOS und dessen Browser Safari, als auch die oft eher schlechte Umsetzung einer WebApp, durch fehlender Funktion der Navigationsbuttons des Browsers oder der URL-Leiste.\par
+	Anhand einer Beispiel WebApp, einer simplen Online-Shop Anwendung, wird der Entwicklungsprozess von einer ``normalen'' Webseite zu einer progressiven Web\-App dargelegt, sowie deren Verwendung von modernen Webtechnologien.\par
+	Vor allem spieltn hier Googles vorangetriebene Entwicklung von sogenannten Service-Workern eine große Rolle, welche die wichtigsten Funktionen und Merkmale einer progressiven WebApp möglich machten.\par
 	
 	\newpage
 	
@@ -88,63 +94,65 @@ version={3.0},
 	\newpage
 	\section{Geschichte und heutige Technologien}
 	
-	Bevor auf die Geschichte und verschiedenen Technologien eingegangen werden kann, muss zwischen zwei Typen von Sprachen unterschieden werden: Clientseitige Sprachen, welche beim Benutzer im Browser ausgeführt werden, und serverseitige Sprachen, welche der Server ausführt, bevor oder während einer Anfrage. Außerdem gibt es weitere Standards, die zum Beispiel der Kommunikation zwischen Client und Server dienen.\par
+	Bevor auf die Geschichte und verschiedenen Technologien eingegangen werden kann, muss zwischen zwei Typen von Sprachen unterschieden werden: Clientseitige Sprachen, welche beim Benutzer im Browser ausgeführt werden, und serverseitige Sprachen, welche der Server ausführt, vor oder während einer Anfrage. Außerdem gibt es weitere Standards, die zum Beispiel der Kommunikation zwischen Client und Server dienen.\par
 	
 	\subsection{Clientseitige Sprachen}
 	
 	\textbf{HTML. Hypertext Markup Language.} Von Beginn des ``Internets'' an ist HTML die grundlegende Sprache zum Strukturieren einer Webseite. Seit der Urversion von 1992 hat sich HTML stark verändert und weiterentwickelt. Damals war Hauptbestandteil nur der Text und dessen Verlinkung, auch bekannt als Hyper\-text-Re\-fe\-ren\-zie\-rung.\cite{htmlWiki}\par
 	Über die Jahre hinweg hat W3C HTML zu HTML5 respektive HTML5.1(seit Ende 2016 \cite{html51}) weiterentwickelt. Im Vordergrund stand hierbei vor allem die strikte Trennung von Struktur und Design. In früheren Versionen war es beispielshalber möglich mit \inlinecode{<center>} einen Text zu zentrieren. Dies soll, genauso wie alle anderen designspezifischen Tags und Attribute, mittels CSS gelöst werden.\par
-	In der aktuellsten Revision, HTML5.1, wurde unter anderem die Einbindung von ``responsive Images'', Bildern, welche dem Browser in verschiedenen Auflösungen zur Verfügung gestellt werden, sodass der Browser nur die passende Auflösung laden muss, möglich gemacht. Es wird sich demnach auf die Unterstützung der große Vielfalt an Endgeräten und deren verschiedenen Bildschirmauflösungen und -verhältnissen konzentriert, welches besonders bei WebApps benötigt wird, da diese sowohl mit mobilen Endgeräten, als auch mit herkömmlichen Rechnern benutzbar sein sollen.\cite{html51blog}\par
+	In der aktuellsten Revision, HTML5.1, wurde unter anderem die Einbindung von ``responsive Images'', Bildern, welche dem Browser in verschiedenen Auflösungen zur Verfügung gestellt werden, sodass der Browser nur die passende Auflösung laden muss, möglich gemacht. Es wird sich demnach auf die Unterstützung der großen Vielfalt an Endgeräten und deren verschiedenen Bildschirmauflösungen und -verhältnissen konzentriert, welche besonders bei WebApps benötigt wird, da diese sowohl mit mobilen Endgeräten, als auch mit herkömmlichen Rechnern benutzbar sein sollen.\cite{html51blog}\par
 	
-	\spacer\textbf{JavaScript, kurz auch JS.} Ursprünglich LiveScript genannt wurde JavaScript entwickelt um dynamisches HTML zu erlauben. Hierbei wird das HTML-Dokument nach dem Laden beim Benutzer verändert. Der Name JavaScript rührt daher, dass LiveScript in Kooperation von Netscape und Sun Mircosystems entwickelt wurde. Um die Popularität von Sun's Sprache Java zu nutzen, wurde LiveScript in JavaScript umbenannt, obwohl es eigentlich wenig mit Java, sowohl vom Syntax her, als auch vom Einsatzgebiet und Entwicklung gemeinsam hat. \cite{jsWiki}\par
-	Heutzutage ist JavaScript Kernbestandteil von Webapps und ist für jegliche clientseitige Aktivität zuständig.\par
+	\spacer\textbf{JavaScript, kurz auch JS.} Ursprünglich LiveScript genannt wurde JavaScript entwickelt um dynamisches HTML zu erlauben. Hierbei wird das HTML-Dokument nach dem Laden beim Benutzer verändert. Der Name JavaScript rührt daher, dass LiveScript in Kooperation von Netscape und Sun Mircosystems entwickelt wurde. Um die Popularität von Suns Sprache Java zu nutzen, wurde LiveScript in Java\-Script umbenannt, obwohl es eigentlich wenig mit Java, sowohl von der Syntax her, als auch vom Einsatzgebiet und Entwicklung, gemeinsam hat. \cite{jsWiki}\par
+	Heutzutage ist JavaScript Kernbestandteil von WebApps und ist für jegliche clientseitige Aktivität zuständig.\par
 	Neben JS existieren, vielmehr existierten auch weitere Skriptsprachen, wie Silverlight, Flash und JavaApplets. Alle sind mittlerweile als obsolet markiert und stellen durch Sicherheitslücken ein hohes Sicherheitsrisiko dar.\cite{flashPlayer} Chrome hat diese, wie einige andere Browser auch, bereits standardmäßig deaktiviert oder sogar ganz entfernt.\cite{chromeNoFlash}\par
 	Leider wird im Volksmund JavaScript häufig mit zuvor genannten JavaApplets verbunden, da die Sprache Java einen eher größeren Bekanntheitsgrad hat als JavaScript. Daher rühren leider auch Gerüchte über große Sicherheitslücken in Browsern durch JS, obwohl eigentlich die JavaApplets diese auslösen.\par
-	Da jeder Browser eine etwas andere Implementierung von JS verfolgt hatte, war es anfangs kompliziert alle Browser gleichzeitig zu unterstützen. Die European Computer Manufacturers Association, kurz ECMA, hat seit 1997 versucht JavaScript in einer Spezifikation zu vereinheitlichen und eben diese Probleme zu beseitigen. Mit Erfolg, denn seit der Version 5.1 aus dem Jahr 2011 ist JS beziehungsweise ECMAScript eine einheitliche Sprache. ECMAScript2015, die sechste Version der Spezifikation, ist in den meisten beliebten Browsern bereits vollständig oder teilweise unterstützt und bildet die Grundlage für Service-Worker, welche in WebApps zwingend benötigt werden. Genauso beinhaltet diese Version auch die Möglichkeit Klassen zu definieren und objektorientiert in JS zu entwickeln.\cite{wikiECMA} \par
+	Da jeder Browser eine etwas andere Implementierung von JS verfolgt hatte, war es anfangs kompliziert alle Browser gleichzeitig zu unterstützen. Die European Computer Manufacturers Association, kurz ECMA, hat seit 1997 versucht Java\-Script in einer Spezifikation zu vereinheitlichen und eben diese Probleme zu beseitigen. Mit Erfolg, denn seit der Version 5.1 aus dem Jahr 2011 ist JS beziehungsweise ECMAScript eine einheitliche Sprache. ECMAScript2015, die sechste Version der Spezifikation, ist in den meisten beliebten Browsern bereits vollständig oder teilweise unterstützt und bildet die Grundlage für Service-Worker, welche in WebApps zwingend benötigt werden. Genauso beinhaltet diese Version auch die Möglichkeit Klassen zu definieren und objektorientiert in JS zu entwickeln.\cite{wikiECMA} \par
 	
 	\spacer\textbf{JSON, JavaScript Object Notation}, ist ein Standard um Objekte zwischen verschiedenen Programmiersprachen zu serialisieren. Dies wird unter anderem dafür genutzt um zwischen zwei Kommunikationspartnern, welche jegliche Programmiersprache für deren Software benutzen können, zu kommunizieren.\par
 	Vorteile von JSON gegenüber anderen Spezifikationen für einfachen Datenaustausch sind zum einen, dass es sowohl für Mensch, als auch für Maschine einfach zu lesen und zu interpretieren ist, zum anderen in praktisch jeder Programmiersprache ein Parser existiert um JSON-Objekte in respektive Objekte umzuwandeln.\cite{json}\par
-	Andere beliebte oder einst beliebte Standards zum Austausch von Daten sind zum Beispiel YAML und XML. Vor allem letzeres wird immer häufiger durch JSON ersetzt, da XML in der Interpretierung weit aus aufwendiger ist und insgesamt für die gleichen Informationen mehr Rohdaten zur Darstellung benötigt.\par
+	Andere beliebte oder einst beliebte Standards zum Austausch von Daten sind zum Beispiel YAML und XML. Vor allem Letzteres wird immer häufiger durch JSON ersetzt, da XML in der Interpretierung weitaus aufwändiger ist und insgesamt für die gleichen Informationen mehr Rohdaten zur Darstellung benötigt.\par
 	
-	\spacer\textbf{AJAX, Asynchronous JavaScript and XML}, ist, mittlerweile, ein Kernbestandteil von JS. Diese Funktion macht es möglich asynchron weitere Anfragen an den Server zu schicken, dessen Inhalt kann zum Beispiel das Aktualisieren von bereits angezeigten Daten sein, oder auch Benutzereingaben sein, um das Abschicken von Formularen ohne ein Neuladen der gesamten Seite möglich zu machen. Ursprünglich wurde für diese Kommunikation XML benutzt, da es aber aus zuvor genannten Gründen praktischer ist JSON zu verwenden, wird normalerweise nur noch JSON hierfür eingesetzt.\cite{ajaxWiki}\par
+	\spacer\textbf{AJAX, Asynchronous JavaScript and XML}, ist mittlerweile ein Kernbestandteil von JS. Diese Funktion macht es möglich asynchron weitere Anfragen an den Server zu schicken, dessen Inhalt kann zum Beispiel das Aktualisieren von bereits angezeigten Daten oder auch Benutzereingaben sein, um das Abschicken von Formularen ohne ein Neuladen der gesamten Seite möglich zu machen. Ursprünglich wurde für diese Kommunikation XML benutzt, da es aber aus zuvor genannten Gründen praktischer ist JSON zu verwenden, wird normalerweise nur noch JSON hierfür eingesetzt.\cite{ajaxWiki}\par
 	
 	\spacer\textbf{WebSockets}, werden, im Gegensatz zu AJAX-Verbindungen, aufrecht erhalten, um so schnell wie möglich Daten zwischen dem Server und dem Client austauschen zu können. Diese Technologie eignet sich vor allem für Echtzeitanwendungen, wie Livechats und Browserspiele, sind aber für WebApps nicht zwingend notwendig.\cite{websocketWiki}\par
 	
-	\spacer\textbf{Responsive web design} ist ein Begriff für, vor allem durch die große Vielfalt an Displaygrößen und -auflösungen geforderten Möglichkeit, eine Webseite zu haben, welche für alle Auflösungen passt. Dank CSS3 ist es möglich für verschiedenste Displaygrößen verschiedene Designregeln festzulegen. Somit kann sich die Webseite immer an die benötigte Umgebung anpassen.\par
+	\spacer\textbf{Responsive web design} ist ein Begriff für vor allem durch die große Vielfalt an Displaygrößen und -auflösungen geforderten Möglichkeit, eine Webseite zu haben, welche für alle Auflösungen passt. Dank CSS3 ist es möglich für verschiedenste Displaygrößen verschiedene Designregeln festzulegen. Somit kann sich die Webseite immer an die benötigte Umgebung anpassen.\par
 	Josh Clark hat dieses Konzept in einem Satz ziemlich gut zusammengefasst: ``Content is like water''\cite{wikiResponsive}. Wenn man Wasser in einen Becher füllt, hat das Wasser die Form des Bechers, wenn man das Wasser wiederum in eine Flasche füllt, hat es die Form der Flasche. Genau so sollte laut ihm eine gute responsive Webseite sein.\par
 	
 	\subsection{Serverseitige Sprachen}
 	
-	\spacer\textbf{PHP, ``PHP: Hypertext Preprocessor''}, mittlerweile, mit über 80\% der Websites, die am weitesten verbreitetste serverseitige Skriptsprache.\cite{phpCoverage}\par
+	\spacer\textbf{PHP, ``PHP: Hypertext Preprocessor''}, mittlerweile mit über 80\% der Websites, die am weitesten verbreitetste serverseitige Skriptsprache.\cite{phpCoverage}\par
 	PHP1, damals noch für \emph{Personal Home Page Tools}, wurde als Ersatz zu Perlskripten von Rasmus Lerdorf entwickelt. Mit PHP3, welches von Andi Gutmans und Zeev Suraski entwickelt wurde(Lerdorf wurde als Entwickler auch eingestellt), wurde die Sprache von Grund auf neu entwickelt und unter dem rekursiven Akronym \emph{PHP: Hypertext Preprocessor} veröffentlicht.\par
 	Mit PHP4 war es zudem möglich objektorientiert zu entwickeln, welches mit PHP5 weiter verbessert wurde.\par
 	Die aktuellste Version ist PHP7.1. Mit PHP7 kamen, 11 Jahre nach PHP5, vor allem eine erheblich verbesserte Performance und einige neue Features, wie die Spezifizierung von Datentypen, dazu.\cite{phpWiki}\par
 	
-	%\newpage
+	\newpage
 	\section{Die (progressive) WebApp}
-	\subsection{Was ist eine (progressive) Webapp?}
+	\subsection{Was ist eine (progressive) WebApp?}
 	Eine WebApp ist tatsächlich schon länger im Internet zu finden als man bei dem sehr modern anmutenden Begriff ``App'' vermuten würde. Tatsächlich ist eine WebApp im Groben eine Internetseite, welche sich wie ein Programm verhält. Demnach sind alle Internetseiten, welche nicht komplett statisch sind, WebApps. Als eines der ersten Beispiele zählt ``SPIRES-HEP'', einem Webinterface zum Zugriff auf eine Datenbank der Stanford Universität im Jahr 1991. Damals wurde ein Vor\-läu\-fer des heutigen HTTP-GET Verfahrens benutzt, um Daten der Benutzer an den Server zu schicken.\par
 	Trotzdem war dieses Interface auf Seiten des Clients noch statisch, denn nachdem einmal die Seite geladen wurde, konnte an dieser nichts mehr verändert werden. Auf der Seite des Servers hingegen war diese Seite dynamisch, denn je nach Anfrage des Benutzers hat der Server einen anderen HTML-Code generiert.\par
-	Eine der ersten von der breiten Öffentlichkeit wahrgenommenen WebApp ist die Suchmaschine Yahoo! gewesen, welche ebenfalls von 2 Studenten der Stanford Universität entwickelt wurde und ursprünglich als Verzeichnis von ihren persönlichen Lesezeichen.\cite{webappWiki}\par
-	Seitdem der Begriff AJAX in JavaScript Einzug erhalten hat, ist es möglich Daten vom Webserver abzufragen, ohne dabei die komplette Seite neu laden zu müssen. Seit 2005 fingen große Unternehmen wie Google an ihre Dienste immer interaktiver zu gestalten. Nebst JavaScript sind einige andere Technologien von verschieden Firmen ausprobiert worden, wie Flash von Adobe und Silverlight von Microsoft. Letztendlich konnte sich aber doch JavaScript beziehungsweise ECMA-Script durchsetzten.\cite{webappWikiEN}\par
-	Die eigentliche Natur hinter dem Namen ``Web Anwendung'' sieht man an den Online-Office Varianten, sowohl von Microsoft, als auch von Google. Hier wurden native Programme, welche von einem herkömmlichen Rechner bekannt waren in das Internet transferiert und um weiteren Funktionen, wie etwa der Möglichkeit mit mehreren Personen an einer Datei gleichzeitig arbeiten zu können, ergänzt.\par
+	Eine der ersten von der breiten Öffentlichkeit wahrgenommenen WebApp ist die Suchmaschine Yahoo! gewesen, welche ebenfalls von zwei Studenten der Stanford Universität entwickelt wurde und ursprünglich als Verzeichnis ihrer persönlichen Lesezeichen diente.\cite{webappWiki}\par
+	Seitdem der Begriff AJAX in JavaScript Einzug gehalten hat, ist es möglich Daten vom Webserver abzufragen, ohne dabei die komplette Seite neu laden zu müssen. Seit 2005 fingen große Unternehmen wie Google an, ihre Dienste immer interaktiver zu gestalten. Nebst JavaScript sind einige andere Technologien von verschieden Firmen ausprobiert worden, wie Flash von Adobe und Silverlight von Microsoft. Letztendlich konnte sich aber doch JavaScript beziehungsweise ECMA-Script durchsetzten.\cite{webappWikiEN}\par
+	Die eigentliche Natur hinter dem Namen ``Web Anwendung'' sieht man an den Online-Office Varianten, sowohl von Microsoft, als auch von Google. Hier wurden native Programme, welche von einem herkömmlichen Rechner bekannt waren in das Internet transferiert und um weitere Funktionen, wie etwa der Möglichkeit mit mehreren Personen an einer Datei gleichzeitig arbeiten zu können, ergänzt.\par
 	Der Begriff ``WebApp'' wird mittlerweile von einigen Browsern, wie Google Chrome und Mozilla Firefox auch für eine spezielle Art deren Browser-Erweiterungen beziehungsweise Plugins verwendet. Diese können, wie ein normales Programm, in einem komplett selbst zur Verfügung stehenden Fenster geöffnet werden und sich wie eben dieses verhalten.\cite{chromeWebStore}\par
-	Selbiges versucht Google auch auf mobilen Endgeräten durchzusetzten, mit Hilfe von ``progressiven WebApps'', diese sind, ähnlich zu den zuvor genannten WebApps, zur Zeit nur unter Android, Internetseiten, welche aussehen, als seien sie native Apps, können aber auch mit Funktionen wie etwa einem Offline-Modus oder Push-Be\-nach\-rich\-ti\-gungen aufwarten. Google begrenzt den Standard nicht nur auf mobile Endgeräte, sondern lässt die Kernfunktionen wie Service-Worker auch in Browsern auf herkömmlichen Rechnern zu, und macht somit ähnliche Funktionalität auch auf Internetseiten möglich, welche auf den ersten Blick nicht nach einer progressiven WebApp aussehen.\cite{prwebappWiki}\par
+	Selbiges versucht Google auch auf mobilen Endgeräten durchzusetzten, mit Hilfe von ``Progressiven WebApps''. Diese sind, ähnlich zu den zuvor genannten WebApps, zur Zeit nur unter Android, Internetseiten, welche aussehen, als seien sie native Apps, können aber auch mit Funktionen wie etwa einem Offline-Modus oder Push-Be\-nach\-rich\-ti\-gungen aufwarten. Google begrenzt den Standard nicht nur auf mobile Endgeräte, sondern lässt die Kernfunktionen wie Service-Worker auch in Browsern auf herkömmlichen Rechnern zu, und macht somit ähnliche Funktionalität auch auf Internetseiten möglich, welche auf den ersten Blick nicht nach einer progressiven WebApp aussehen.\cite{prwebappWiki}\par
 	
 	\subsection{Vor- und Nachteile}
-	Progressive WebApps sind zum Zeitpunkt der Recherche leider noch kein fertiger Standard. Dank Googles starken Enthusiasmus die Entwicklung fortzutreiben sind progressive WebApps in der jetztigen Form bereits, sowohl am herkömmlichen Rechner, als auch an mobilen Endgeräten mit Google Chrome und Windows- oder Android-Betriebssystem völlständig unterstützt. Auch Mozilla Firefox unterstützt seit Version 44 nicht nur Service-Worker und somit die Grundlage hinter progressiven WebApps, sondern auch die meisten anderen Funktionen die für WebApps benötigt werden.Auch in Microsoft neem Browser EDGE sind Service-Worker und andere Funktionen für WebApps bereits in aktiver Entwicklung.\cite{swReady}\par
-	Das Team von Webkit, der Webplatform auf der unter anderem Safari basiert, hat diese erst in ihren Fünf-Jahres-Plan aufgenommen, zuerst etwas zurückhaltend mit einem inoffiziellem Kommentar ``Service Worker: People think they want it, some of them actually do want it. We should probably do it.''\cite{webkitServiceWorkerTwitter}, der später zu ``Service Worker: Becoming a more frequent request. We should do it.''\cite{webkitServiceWorker5yPlan} geändert wurde. Somit werden progressive WebApps vorerst ein Privileg, sowohl für Androidbenutzer mit Chrome als Browser, als auch Desktopbenutzer mit Google Chrome oder Mozilla Firefox sein. \cite{telerikWebApp}\par
-	Um aus einer bestehenden Webseite eine progressive WebApp zu machen ist in einigen wenigen Schritten möglich. Zum einen muss die Seite komplett über HTTPS ausgeliefert werden, was in der heutigen Zeit, auch dank Initiativen wie Let's Encrypt, schon sehr weit verbreitet ist, zum anderen müssen zwei kleine Dateien erstellt werden, ein Service-Worker für Offline-Funktionalität und ein Manifest mit Icons in verschiedenen Auflösungen. Durch das bloße Hinzufügen dieser Dateien, muss an keiner anderen Stelle der Webseite etwas geändert werden, was die volle Kompatibilität mit Browser ohne die oben genannten Funktionen aufrecht erhält, denn diese Dateien werden von diesen Browsern einfach ignoriert.\par
+	Progressive WebApps sind zum Zeitpunkt der Recherche leider noch kein fertiger Standard. Dank Googles starkem Enthusiasmus die Entwicklung voranzutreiben sind Progressive WebApps in der jetztigen Form bereits, sowohl am herkömmlichen Rechner, als auch an mobilen Endgeräten mit Google Chrome und Windows- oder Android-Betriebssystem völlständig unterstützt.\par
+	Auch Mozilla Firefox unterstützt seit Version 44 nicht nur Service-Worker und somit die Grundlage hinter progressiven WebApps, sondern auch die meisten anderen Funktionen die für WebApps benötigt werden.Auch in Microsoft neem Browser EDGE sind Service-Worker und andere Funktionen für WebApps bereits in aktiver Entwicklung.\cite{swReady}\par
+	Das Team von Webkit, der Webplattform auf der unter anderem Safari basiert, hat diese erst in ihren Fünf-Jahres-Plan aufgenommen, zuerst etwas zurückhaltend mit einem inoffiziellem Kommentar ``Service Worker: People think they want it, some of them actually do want it. We should probably do it.''\cite{webkitServiceWorkerTwitter}, der später zu ``Service Worker: Becoming a more frequent request. We should do it.''\cite{webkitServiceWorker5yPlan} geändert wurde. Somit werden progressive WebApps vorerst ein Privileg, sowohl für Androidbenutzer mit Chrome als Browser, als auch für Desktopbenutzer mit Google Chrome oder Mozilla Firefox sein. \cite{telerikWebApp}\par
+	Aus einer bestehenden Webseite eine progressive WebApp zu machen ist in einigen wenigen Schritten möglich. Zum einen muss die Seite komplett über \-HTTPS ausgeliefert werden, was in der heutigen Zeit, auch dank Initiativen wie Let's Encrypt, schon sehr weit verbreitet ist, zum anderen müssen zwei kleine Dateien erstellt werden, ein Service-Worker für Offline-Funktionalität und ein Manifest mit Icons in verschiedenen Auflösungen.\par
+	Durch das bloße Hinzufügen dieser Dateien muss an keiner anderen Stelle der Webseite etwas geändert werden, was die volle Kompatibilität mit Browser ohne die oben genannten Funktionen aufrecht erhält, denn diese Dateien werden von diesen Browsern einfach ignoriert.\par
 	Ein anderes Argument gegen WebApps ist eine oft schlechte Umsetzung. Zum einen sind diese meist Single-Page-Anwendungen und nicht jeder Entwickler implementiert die Funktionen der Vor- und Zurück-Buttons des Browsers korrekt, sodass diese innerhalb der Single-Page-Anwendung agieren und nicht auf die vorherige Seite zurückführen. Zum anderen ist es meist nicht mehr möglich eine URL zu einer bestimmten Ansicht zu bekommen, denn auch hier sorgt die Single-Page-Anwendung dafür, dass nur eine URL für die gesamte Anwendung sichtbar ist.\par
-	Es gibt jedoch einige WebApps, bei denen diese Punkte gut umgesetzt wurden, so ändert sich zum Beispiel die Addressleiste passend zum aktuellen Kontext und beinhaltet eine URL welche beim direkten Aufruf auf diese Ansicht führt. Ein Beispiel hierfür wäre materialUP\footnote{\inlinecode{Material Up}: \url{https://material.uplabs.com/}}. Leider ist die Entwicklung einer solchen WebApp wieder mit mehr Aufwand verbunden, wobei dieser immernoch weitaus niedriger ist, als bei nativen Apps, welche zusätzlich für mehrere verschiedene Platformen entwickelt werden müssen.\par
-	Je nach Einsatzgebiet der WebApp, kann es aber auch explizit gewollt sein, dass sich beispielsweise die Addressleiste nicht ändert.\par
+	Es gibt jedoch einige WebApps, bei denen diese Punkte gut umgesetzt wurden, so ändert sich zum Beispiel die Addressleiste passend zum aktuellen Kontext und beinhaltet eine URL welche beim direkten Aufruf auf diese Ansicht führt. Ein Beispiel hierfür wäre materialUP\footnote{\inlinecode{Material Up}: \url{https://material.uplabs.com/}}. Leider ist die Entwicklung einer solchen WebApp wieder mit mehr Aufwand verbunden, wobei dieser immer noch weitaus niedriger ist, als bei nativen Apps, welche zusätzlich für mehrere verschiedene Plattformen entwickelt werden müssen.\par
+	Je nach Einsatzgebiet der WebApp kann es aber auch explizit gewollt sein, dass sich beispielsweise die Addressleiste nicht ändert.\par
 	
-	%\newpage
+	\newpage
 	\section{Entwicklung einer progressiven WebApp}
 	\subsection{Vorbereitung}
 	Zur Vorbereitung gehören neben der Einrichtung der Entwicklungsumgebung und des Webservers auch die Sammlung benötigter Bibliotheken.\par
 	Bei der Einrichtung des Webservers wurde ein Ordner für dieses Projekt samt passender Zugriffsrechte und gültigen SSL-Zertifikat erstellt. Dieses Zertifikat ist nicht nur für die Funktionalität von Service-Workern, bei welchen eine Verbindung via SSL Pflicht ist, sondern auch für den generellen Datenschutz des Nutzers wichtig.\par
-	Als einfachste Serversoftware ist hier Caddyserver\footnote{\inlinecode{Caddyserver} - The HTTP/2 web server with automatic HTTPS: \url{https://caddyserver.com/}} von Vorteil. Dieser bietet nicht nur einfach Erweiterbarkeit, wie zum Beispiel für PHP, und gute Performance, sondern unterstützt schon das neue Protokoll HTTP/2 und kann automatisch SSL-Zertifikate für die eingerichteten Domains austellen lassen.\par
+	Als einfachste Serversoftware ist hier Caddyserver\footnote{\inlinecode{Caddyserver} - The HTTP/2 web server with automatic HTTPS: \url{https://caddyserver.com/}} von Vorteil. Dieser bietet nicht nur einfache Erweiterbarkeit, wie zum Beispiel für PHP, und gute Performance, sondern unterstützt schon das neue Protokoll HTTP/2 und kann automatisch SSL-Zertifikate für die eingerichteten Domains austellen lassen.\par
 	Da eine Entwicklung ohne jegliche Bibliotheken viel zu lang dauern würde und nicht praktikabel ist wurden im Beispiel des Online-Shops einige Bibliotheken verwendet:\par
 	
 	\spacer\textbf{Materialize CSS\footnote{\inlinecode{Materialize Frontend-Framework}: \url{http://materializecss.com/}}:} Dies ist eine CSS/JS-Bibliothek, welche die meisten Designelemente Googles Material Design Definition zur Verfügung stellt. Somit lassen sich ohne viel Aufwand mittels HTML und passenden CSS-Klassen responsive Webseiten erstellen.\par
@@ -152,56 +160,55 @@ version={3.0},
 	\spacer\textbf{Dexie.js\footnote{\inlinecode{dexie.js}: \url{http://dexie.org/}}:} Um auf eine der beliebtesten Web Datenbanken, IndexedDB zuzugreifen bietet dexie.js einfache, objektorientierte Methoden und Klassen.\par
 	\spacer Einige kleinere JavaScript Funktionen wurden zusätzlich verwendet um zum Beispiel Hashfunktionen wie md5 auszuführen.\par
 	
-	%\newpage
+	\newpage
 	\subsection{Struktur}
 	\subsubsection{JavaScript}
-	%{
-	%	\centering
-	%	\includegraphics[width=\textwidth]{diagramJS}
-	%	\textsc{Klassendiagramm JavaScript}\par
-	%}
-	In JavaScript wird nach Möglichkeit das ``Model View Controller''\cite{wikiMVC} Design\-pat\-tern angewendet. Es soll hiermit der, Teil der die eigentlichen Daten verwaltet, von dem Teil, der den View beziehungsweise die Darstellung, kontrolliert, trennen. Jediglich der Controller ``kennt'' beide Teile und sorgt dafür, dass diese zusammenarbeiten.\par
+	{
+		\centering
+		\includegraphics[width=12cm]{diagramJS}
+		\textsc{Klassendiagramm JavaScript}\par
+	}
+	In JavaScript wird nach Möglichkeit das ``Model View Controller''\cite{wikiMVC} Design\-pat\-tern angewendet. Es soll hiermit der Teil, der die eigentlichen Daten verwaltet, von dem Teil, der den View beziehungsweise die Darstellung, kontrolliert, trennen. Lediglich der Controller ``kennt'' beide Teile und sorgt dafür, dass diese zusammenarbeiten.\par
 	
 	\subsubsection{Datenbank}
-	%{
-	%	\centering
-	%	\includegraphics[width=\textwidth]{diagramMySQL}
-	%	\textsc{Datenbank Shema MySQL}\par
-	%}
+	{
+		\centering
+		\includegraphics[width=\textwidth]{diagramMySQL}
+		\textsc{Datenbank Shema MySQL}\par
+	}
 	In der gesamten WebApp gibt es zwei verschiedene Datenbanken, einmal die IndexedDB, welche clientseitig agiert, nur die Daten verwaltet die wirklich relevant für den Benutzer sind und vor allem für die Gewährleistung der Offline-Funk\-ti\-o\-na\-li\-tät verantwortlich ist. Diese Datenbank hat eine ähnliche Struktur zu den Klassen in JavaScript.\par
-	Zum anderen eine MySQL-Datenbank, welche auf dem Server läuft und die gesamten Daten von allen Benutzern beinhaltet, beziehungweise die verwaltet.\par
+	Zum anderen eine MySQL-Datenbank, welche auf dem Server läuft und die gesamten Daten von allen Benutzern beinhaltet, beziehungweise diese verwaltet.\par
 	
 	\subsubsection{Klassen in PHP}
-	%{
-	%	\centering
-	%	\includegraphics[width=\textwidth]{diagramPHP}
-	%	\textsc{Klassendiagramm PHP}\par
-	%}
-	In PHP werden die Klassen sehr stark an die Tabellen aus der MySQL-Datenbank angelehnt, denn die Klassen sollen einzelne Datensätze dieser Tabellen repräsentieren können. Jeglich Form von Darstellung soll clientseitig passiern, daher kann für PHP keines der Designpatterns für objektorientierte Programmierung angewandt werden, weil PHP nur Daten in ``Rohformat'' oder verarbeitetem Rohformat zurück geben soll.\par
+	{
+		\centering
+		\includegraphics[width=\textwidth]{diagramPHP}
+		\textsc{Klassendiagramm PHP}\par
+	}
+	In PHP werden die Klassen sehr stark an die Tabellen aus der MySQL-Datenbank angelehnt, denn die Klassen sollen einzelne Datensätze dieser Tabellen repräsentieren können. Jegliche Form von Darstellung soll clientseitig passieren, daher kann für PHP keines der Designpatterns für objektorientierte Programmierung angewandt werden, weil PHP nur Daten in ``Rohformat'' oder verarbeitetem Rohformat zurückgeben soll.\par
 	
 	\subsubsection{API}
-	--> API Diagramm?
 	Die API ist die Grundlage zur Kommunikation zwischen Server und Client. Sie besteht aus einzelnen Ordnern, welche wie die PHP-Klassen strukturiert sind. Innerhalb dieser Ordner gibt es für jede Funktion, welche durch die API auf der Klasse ausgeführt werden soll, ein PHP-Skript, welches genau diese Funktion ausführt und zuvor auf Eingabefehler prüft.\par
 	
-	%\newpage
+	\newpage
 	\subsection{Entwicklungsprozess}
-	Die Reihenfolge der einzelnen Schritte sind in den meisten Fällen persönliche Präferenz. Oft ist bereits eine Webseite vorhanden, falls diese, wie in diesem Beispiel, bereits eine responsive Webseite ist, demnach sowohl auf normalen Rechnern, als auch auf mobilen Endgeräten gut zu Bedienen ist, kann diese beibehalten werden. Man sollte jedoch möglichst versuchen eine Single-Page-Webanwendung\cite{singlePageWiki} aus der Webseite zu bauen, um die Illusion einer nativen Anwendung zu gewährleisten.\par
+	Die Reihenfolge der einzelnen Schritte ist in den meisten Fällen persönliche Präferenz. Oft ist bereits eine Webseite vorhanden, falls diese, wie in diesem Beispiel, bereits eine responsive Webseite ist, demnach sowohl auf normalen Rechnern, als auch auf mobilen Endgeräten gut zu bedienen ist, kann diese beibehalten werden. Man sollte jedoch möglichst versuchen eine Single-Page-Webanwendung\cite{singlePageWiki} aus der Webseite zu bauen, um die Illusion einer nativen Anwendung zu gewährleisten.\par
 	
 	\subsubsection{Client Grundlagen}
-	Ursprünglich war sowohl die Me\-nü\-füh\-rung, als auch der Inhalt in einer HTML-Datei. Um auf dieser einen Seite mehrere Seiten ``emulieren'' zu können wurde der Bereich des Inhalts mehrfach hinzugefügt und versteckt. Es wird dann immer nur der Teil des Inhalts sichtbar gemacht, der die aktuelle Seite darstellt. Wenn man von einer normalen Webseite ausgeht, wurden hier mehrere HTML-Dateien in eine vereint. Bei kleineren Seiten führt das nicht merklich zu einem Nachteil, bei größeren kann es zu Performanceeinbußen kommen, da immer der gesamte Inhalt im Hintergrund geparst werden muss.\par
-	Um den entgegenzuwirken wird der passende HTML-Code erst während des Aufrufs der emulierten Unterseite erzeugt. Hierfür bietet die JS-Bibliothek \inlinecode{handle\-bars.js\footnote{\inlinecode{handlebars.js}: \url{http://handlebarsjs.com/}}} sogenannte Templates, dies sind Blaupausen für HTML-Code, welche mit Daten ausgefüllt werden können.\par
+	Ursprünglich war sowohl die Me\-nü\-füh\-rung, als auch der Inhalt in einer HTML-Datei. Um auf dieser einen Seite mehrere Seiten ``emulieren'' zu können wurde der Bereich des Inhalts mehrfach hinzugefügt und versteckt. Es wird dann immer nur der Teil des Inhalts sichtbar gemacht, der die aktuelle Seite darstellt. Wenn man von einer normalen Webseite ausgeht, wurden hier mehrere HTML-Dateien in einer vereint. Bei kleineren Seiten führt das nicht merklich zu einem Nachteil, bei größeren kann es zu Performanceeinbußen kommen, da immer der gesamte Inhalt im Hintergrund geparst werden muss.\par
+	Um dem entgegenzuwirken wird der passende HTML-Code erst während des Aufrufs der emulierten Unterseite erzeugt. Hierfür bietet die JS-Bibliothek \inlinecode{handle\-bars.js\footnote{\inlinecode{handlebars.js}: \url{http://handlebarsjs.com/}}} sogenannte Templates, dies sind Blaupausen für HTML-Code, welche mit Daten ausgefüllt werden können.\par
 	Zunächst wird die App-Shell, welche das immer gleichbleibende Grundgerüst der Anwendung, wie der Kopfzeile und der Navigations\-leiste, darstellt, von der restlichen Anwendung getrennt. Somit erhalten wir ein ``leeres'' Grundgerüst, in dem ein \inlinecode{div} existiert, welches später mittels DOM-Manipulation mit, von zuvor genannten Blaupausen generierten, Inhalt gefüllt werden kann. Dies bildet die Datei \inlinecode{appUser.html}.\par
 	
 	\subsubsection{Das Manifest}
 	Das Manifest ist der Bestandteil einer progressiven WebApp, der es (unter anderem) möglich macht, diese zum Homescreen hinzuzufügen.\par
-	Es besteht aus einer JSON-Datei, welche in jedem HTML-Dokument einer WebApp im \inlinecode{<head>}-Bereich verlinkt sein muss. In dieser Datei werden neben dem Namen, Icons und der Start-URL auch Parameter zur Darstellung wie der Hauptfarbe und der Orientation festgelegt. Der Parameter \inlinecode{"{}display"{}: "{}standalone"{}} macht aus einer normalen Webseite eine ``echte'' WebApp, indem es jegliche UI-Elemente des Browsers verbergt und die Webseite wie eine native App aussehen lässt.\par
+	Es besteht aus einer JSON-Datei, welche in jedem HTML-Dokument einer WebApp im \inlinecode{<head>}-Bereich verlinkt sein muss. In dieser Datei werden neben dem Namen, Icons und der Start-URL auch Parameter zur Darstellung wie der Hauptfarbe und der Bildschirm-Orientierung festgelegt. Der Parameter \inlinecode{"{}display"{}: "{}stand\-alone"{}} macht aus einer normalen Webseite eine ``echte'' WebApp, indem es jegliche UI-Elemente des Browsers verbergt und die Webseite wie eine native App aussehen lässt.\par
 	
 	\subsubsection{Der Service-Worker}
-	Grundlegend ist ein Service-Worker ein JavaScript-Skript, welches vom Browser ``installiert'' wird. Das heißt der Browser speichert das Skript und führt dieses, nicht nur solange eine Seite bzw. Tab offen ist, sondern auch darüber hinaus, aus.\par
+	Grundlegend ist ein Service-Worker ein JavaScript-Skript, welches vom Browser ``installiert'' wird. Das heißt der Browser speichert das Skript und führt dieses nicht nur solange eine Seite bzw. Tab offen ist, sondern auch darüber hinaus, aus.\par
 	In Google Chrome zum Beispiel funktionieren Service-Worker, genauso wie einige andere Funktionen, darunter Zugriff auf die Webcam oder den Standort, nur wenn die aufgerufene Seite ein ``secure Origin'' ist, hierbei \emph{muss} die Seite unter anderem vollständig über SSL ausgeliefert werden. Ausnahmen hierfür sind zu Entwicklungszwecken \inlinecode{localhost} und \inlinecode{127.0.0.1}. Außerdem darf pro Webseite nur ein Service-Worker existieren.\par
-	Eine Aufgabe, die dieser Service-Worker erledigt, ist das sogenannte ``Caching'' von Dateien. Hierbei werden alle zur Offline Benutzung benötigten Resourcen in einem ``Cache'' zwischengespeichert. Somit kann die WebApp größtenteils auch offline verwendet werden.\par
-	Da die Entwicklung dieses Teils des Service-Workers oft mit viel reproduktiver Arbeit verbunden ist, haben die Google Chrome Entwickler eine Bibliothek\footnote{\inlinecode{sw-precache} - GitHub: \url{https://github.com/GoogleChrome/sw-precache}} zur Verfügung gestellt. Mit dieser lässt sich nach eingestellten Regeln ein Service-Worker erstellen, der alle benötigten Resourcen ``cachet''. Somit muss auf dem Entwicklungsrechner lediglich ein lokales Skript ausgeführt werden, welches alle zu cachenden Dateien im Service-Worker verlinkt.\par
-	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Be\-nach\-rich\-ti\-gungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert, und erhält von diesem Zeitpunkt an Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls die Benachrichtigungen durch den Nutzer als störend empfunden werden. Hierauf wird im späteren Verlauf der Entwicklung weiter eingegangen.\par
+	Eine Aufgabe, die dieser Service-Worker erledigt, ist das sogenannte ``Caching'' von Dateien. Hierbei werden alle zur Offline Benutzung benötigten Ressourcen in einem ``Cache'' zwischengespeichert. Somit kann die WebApp größtenteils auch offline verwendet werden.\par
+	Da die Entwicklung dieses Teils des Service-Workers oft mit viel reproduktiver Arbeit verbunden ist, haben die Google Chrome Entwickler eine Bibliothek\footnote{\inlinecode{sw-precache} - GitHub: \url{https://github.com/GoogleChrome/sw-precache}} zur Verfügung gestellt. Mit dieser lässt sich nach eingestellten Regeln ein Service-Worker erstellen, der alle benötigten Ressourcen ``cachet''. Somit muss auf dem Entwicklungsrechner lediglich ein lokales Skript ausgeführt werden, welches alle zu cachenden Dateien im Service-Worker verlinkt.\par
+	Eine weitere Aufgabe des Service-Workers besteht darin, Push-Be\-nach\-rich\-ti\-gungen zu verwalten. Hierbei muss der Benutzer erst bestätigen, dass dieser Nachrichten erhalten darf. Durch eine Bestätigung hat dieser den Push-Dienst abonniert und erhält von diesem Zeitpunkt an Push-Benachrichtigungen. Diese Bestätigung kann jederzeit wieder zurückgenommen werden, falls die Benachrichtigungen durch den Nutzer als störend empfunden werden. Hierauf wird im späteren Verlauf der Entwicklung weiter eingegangen.\par
 	
 	\subsubsection{View-Klassen}
 	Durch ECMA-Script 2015 und 2016, kurz ECMA-Script 6 oder ES6, ist es möglich ``echte'' Klassen in JS zu schreiben. Diese werden ähnlich zu anderen Programmiersprachen wie folgt definiert:\par
@@ -223,38 +230,38 @@ class Foo {
 	Genauso wie hier kann mit den weiteren Unterseiten verfahren werden. Wichtig ist jedoch, dass innerhalb der View-Klassen keine AJAX-Anfragen zum Server geschickt werden sollen, um Daten abzufragen. Dieser Teil soll von anderen Klassen später geregelt werden.\par
 	
 	\subsubsection{Datenmodell-Klassen}
-	Um nun auch mit Daten arbeiten zu können, wird in diesem Schritt das Datenmodell erstellt. Diese Klassen werden zum Beispiel durch den Kontroller benutzt, um die, vom Server erhaltenen Daten, in Objekte umzuwandeln und somit einfacher verwenden kann.\par
+	Um nun auch mit Daten arbeiten zu können, wird in diesem Schritt das Datenmodell erstellt. Diese Klassen werden zum Beispiel durch den Kontroller benutzt, um die vom Server erhaltenen Daten in Objekte umzuwandeln und somit einfacher verwenden können.\par
 	Im Beispiel des Online-Shops umfasst das Modell die Klassen \inlinecode{FilamentType, Order, User}. Solche Klassen wurden in der Basis-Version nicht verwendet, in dieser wurde der empfangene JSON-Code direkt mittels einer HTML-Blaupause auf der Seite angezeigt.\par
 	Ein Vorteil diese Klassen ist es, dass diese auch ohne eine Anbindung an einen Server funktionieren können. Da die serverseitige Entwicklung erst im Anschluss folgt, werden die Daten nicht vom Server empfangen, sondern in einer IndexedDB gespeichert. Später dient diese Datenbank als ein Zwischenspeicher für die empfangenen Daten des Servers um so die Offline-Funktionalität zu gewährleisten.\par
 	Die Implementierung einer solchen Datenbank setzt vorraus, asynchrones Java\-Script zu programmieren, welches das gesamte JS mit einigen Call\-back-Funk\-ti\-onen mehr verkompliziert.\par
 	
 	\subsubsection{Der Controller}
-	Da nun sowohl das Model als auch der View Klassen haben, kann der Controller entwickelt werden. Dieses JS-Skript initiziert das Laden des Models aus der IndexedDB und gibt diese Daten an die passende View-Klasse weiter, sobald diese benötigt werden, das heißt, sobald der Benutzer die emulierte Unterseite aufruft.\par
-	Desweitern gibt der Kontroller die Interaktionen des Benutzers mit dem View and das Model weiter um die IndexedDB nach den Änderungen des Benutzers zu aktualisieren.\par
+	Da nun sowohl das Model als auch der View Klassen haben, kann der Controller entwickelt werden. Dieses JS-Skript initiiert das Laden des Models aus der IndexedDB und gibt diese Daten an die passende View-Klasse weiter, sobald diese benötigt werden, das heißt, sobald der Benutzer die emulierte Unterseite aufruft.\par
+	Desweitern gibt der Kontroller die Interaktionen des Benutzers mit dem View an das Model weiter um die IndexedDB nach den Änderungen des Benutzers zu aktualisieren.\par
 	
 	\subsubsection{Serverseitige Grundlagen}
-	Als erste Grundlage einer jeden Webseite steht die Datenbank. Diese ist in diesem Beispiel bereits vorhanden und auch schon mit Daten gefüllt, so, dass man eine Kopie dieser Datenbank gut zum Entwickeln und Testen benutzen kann. Die Klassen in PHP halten sich, wie oben bereits genannt sehr stark an das verwendete Datenbankschema. Demnach sind diese Klassen Repräsentanten in PHP für die einzelnen Datensätze in der Datenbank. Trotzdem beherbergen sie einige weiter Funktionen, um zum Beispiel Daten des Benutzers zu Verarbeiten und zu Validieren.\par
+	Als erste Grundlage einer jeden Webseite steht die Datenbank. Diese ist in diesem Beispiel bereits vorhanden und auch schon mit Daten gefüllt, so, dass man eine Kopie dieser Datenbank gut zum Entwickeln und Testen benutzen kann. Die Klassen in PHP halten sich, wie oben bereits genannt sehr stark an das verwendete Datenbankschema. Demnach sind diese Klassen Repräsentanten in PHP für die einzelnen Datensätze in der Datenbank. Trotzdem beherbergen sie einige weiter Funktionen, um zum Beispiel Daten des Benutzers zu verarbeiten und zu validieren.\par
 	
 	\subsubsection{API}
 	Eine richtige API ist bisher noch nicht implementiert worden, es wurde zwar mit dem Server schon via JSON kommuniziert, aber dies ging von einem PHP-Skript aus, welches nicht gerade strukturiert war.\par
-	Die hier verwendete API ist ähnlich zu einer ``RESTful-API''\cite{wikiRestful}, jedoch ist es nicht immer möglich diese auf jedem beliebigen Webserver zu implementieren, da PHP hierbei Zugriff auf verschiedene HTTP-Header, wie \inlinecode{GET, PUT, DELETE, INSERT, POST, usw.} benötigt. Anstatt HTTP-Header auf Ordner anzuwenden, werden in diesem Beispiel für jede Funktion die auf einen dieser API Ordner, beispielsweise \inlinecode{/api/users/}, angewendet werden soll, wird ein PHP-Skript erstellt, dass den passenden Namen trägt: \inlinecode{create.php}.\par Diesem Skript kann nun mittels Standard-Headern die zu verwendenden Daten übergeben werden. Die Antwort des Server erfolgt hierbei stets mittels JSON, sodass der JavaScript-Client ziemlich schnell die Antwort interpretieren und weiterverwenden kann.\par
+	Die hier verwendete API ist ähnlich zu einer ``RESTful-API''\cite{wikiRestful}, jedoch ist es nicht immer möglich diese auf jedem beliebigen Webserver zu implementieren, da PHP hierbei Zugriff auf verschiedene HTTP-Header, wie \inlinecode{GET, PUT, DELETE, INSERT, POST, usw.} benötigt. Anstatt HTTP-Header auf Ordner anzuwenden, werden in diesem Beispiel für jede Funktion die auf einen dieser API Ordner, beispielsweise \inlinecode{/api/users/}, angewendet werden soll, wird ein PHP-Skript erstellt, welches den passenden Namen trägt: \inlinecode{create.php}.\par Diesem Skript können nun mittels Standard-Headern die zu verwendenden Daten übergeben werden. Die Antwort des Server erfolgt hierbei stets mittels JSON, sodass der JavaScript-Client ziemlich schnell die Antwort interpretieren und weiterverwenden kann.\par
 	
 	\subsubsection{Vollständige Offline-Fähigkeit}
-	Nachdem durch den Einbau eines Service-Workers bereits alle statischen Inhalte und Ressourcen offline verfügbar gemacht wurden, sollen auch die dynamischen Ressourcen offline einsehbar gemacht werden. Hierfür wurde zuvor die IndexedDB implementiert. Sobald der Benutzer nun versucht Daten anzeigen zu lassen versucht die passende Model-Klasse zunächst neuste Daten vom Server abzufragen, falls dies scheitern sollte, aber bereits ein älterer Stand in der IndexedDB existiert benutzt die Klasse diesen, informiert jedoch den Controller darüber, dass es sich um eine ältere Version der Daten handelt, damit die View-Klassen den Benutzer darüber in Kenntnis setzten können.\par
-	Damit jedoch in der IndexedDB im Offline-Modus eine älterer Stand der Daten sein kann, werden bei jeder Anfrage an der Server das Ergebnis in dieser Datenbank strukturiert gespeichert, samt dem Zeitpunkt, von wann diese Daten stammen.
+	Nachdem durch den Einbau eines Service-Workers bereits alle statischen Inhalte und Ressourcen offline verfügbar gemacht wurden, sollen auch die dynamischen Ressourcen offline einsehbar gemacht werden. Hierfür wurden zuvor die IndexedDB implementiert. Sobald der Benutzer nun versucht Daten anzeigen zu lassen versucht die passende Model-Klasse zunächst neuste Daten vom Server abzufragen, falls dies scheitern sollte, aber bereits ein älterer Stand in der IndexedDB existiert benutzt die Klasse diesen, informiert jedoch den Controller darüber, dass es sich um eine ältere Version der Daten handelt, damit die View-Klassen den Benutzer darüber in Kenntnis setzten können.\par
+	Damit jedoch in der IndexedDB im Offline-Modus eine älterer Stand der Daten sein kann, wird bei jeder Anfrage an den Server das Ergebnis in dieser Datenbank strukturiert gespeichert, samt des Zeitpunkts, von wann diese Daten stammen.
 	
 	\subsubsection{Push-Benachrichtigungen}
-	Um den Benutzter des Online-Shops angemessen über den Stand seiner Bestellungen informieren zu können sollen Push-Benachrichtigungen in der progres\-siven WebApp Einzug erhalten.\par
+	Um den Benutzter des Online-Shops angemessen über den Stand seiner Bestellungen informieren zu können, sollen Push-Benachrichtigungen in der progres\-siven WebApp Einzug halten.\par
 	Da diese Benachrichtigungen auf einem vertraulichen Level sind, müssen diese verschlüsselt werden. Deshalb benötigt sowohl jeder Client, als auch der Server jeweils ein Schlüsselpaar. Für den Server passiert die Generierung dieses RSA-Schlüsselpaars nach Möglichkeit nur einmal, denn dessen öffentlicher Schlüssel wird fest in den JavaScript eingebunden.\par
-	Wenn nun ein Benutzer in den Einstellungen die Push-Be\-nach\-rich\-ti\-gungen aktivieren möchte, fragt der Browser diesen, ob er der Webseite beziehungsweise Web\-App, zulassen möchte. Ist diese Anfrage bestätigt worden, generiert der Client, genauso wie der Server auch, ein RSA-Schlüsselpaar und sendet den öffentlichen Schlüssel, samt sogenannter Entpunkt Informationen an den Server. Je nach benutzten Browser werden Push-Benachrichtigungs Server zur Verfügung gestellt, welche die Nachrichten jederzeit, verschlüsselt, empfangen und versuchen an den Empfänger weiterzuleiten.\par
+	Wenn nun ein Benutzer in den Einstellungen die Push-Be\-nach\-rich\-ti\-gungen aktivieren möchte, fragt der Browser diesen, ob er diese der Webseite beziehungsweise Web\-App, zulassen möchte. Ist diese Anfrage bestätigt worden, generiert der Client, genauso wie der Server auch, ein RSA-Schlüsselpaar und sendet den öffentlichen Schlüssel samt sogenannter End\-punkt-In\-for\-ma\-ti\-onen an den Server. Je nach benutztem Browser werden Push-Benachrichtigungs Server zur Ver\-fü\-gung gestellt, welche die Nachrichten jederzeit verschlüsselt empfangen und versuchen an den Empfänger weiterzuleiten.\par
 	Sollte dies nicht funktionieren, hält der Server diese Nachricht solange zurück, bis eine zuvor definierte Zeit, beispielsweise 2 Tage, abgelaufen ist, oder der Client wieder erreichbar ist.\par
 	Der eigene Server kennt, somit die Endpunkte der einzelnen Benutzer und kann diesen mit Hilfe der Push-Severn verschlüsselt Nachrichten schicken. Diese müs\-sen noch nicht einmal speziell für Push-Be\-nach\-rich\-ti\-gungen gedacht sein, sondern können den Client auch über andere wichtige Dinge informieren.\par
-	Im Online-Shop Beispiel wird der JSON-Kodierte Code, der als Push-Nachricht beim Client angekommen ist, zuerst interpretiert und daraufhin die passende Benachrichtigung angezeigt, mit welcher der Benutzer genauso Interagieren kann, wie mit einer nativen Benachrichtigung. So kann dieser die Benachrichtigung an\-klicken und wird automatisch zur passenden Bestellung weitergeleitet.\par
+	Im Online-Shop Beispiel wird der JSON-Kodierte Code, der als Push-Nachricht beim Client angekommen ist, zuerst interpretiert und daraufhin die passende Benachrichtigung angezeigt, mit welcher der Benutzer genauso interagieren kann, wie mit einer nativen Benachrichtigung. So kann dieser die Benachrichtigung an\-klicken und wird automatisch zur passenden Bestellung weitergeleitet.\par
 	
-	%\newpage
+	\newpage
 	\section{Fazit}
-	Trotz der teils noch mangelhaften Unterstützung der Technologien, welche notwendig sind um WebApps oder progressive WebApps möglich zu machen. Vor allem Webkit ist hier mit der Entwicklung leider erst ziemlich am Anfang, was einen der größten Vorteile einer WebApp teilweise zunichtemacht, denn wenn das zweit beliebteste mobile Betriebssystem noch keine Unterstützung anbietet, wäre trotzdem eine native App für dieses notwendig.\par
-	Laut den aktuellen Planungen sollten die nötigen Technologien innerhalb der nächsten fünf Jahre Einzug in Safari erhalten. Auch wenn fünf Jahre in der Informatik und der Zeit des Internets wie eine ziemlich lange Zeit erscheinen, kann man positiv in die Zukunft blicken.\par
+	Trotz der teils noch mangelhaften Unterstützung der Technologien, welche notwendig sind um WebApps oder progressive WebApps möglich zu machen, sind WebApps auf einem guten Weg. Vor allem Webkit ist hier mit der Entwicklung leider erst ziemlich am Anfang, was einen der größten Vorteile einer WebApp teilweise zunichtemacht, denn wenn das zweit beliebteste mobile Betriebssystem noch keine Unterstützung anbietet, wäre trotzdem eine native App für dieses notwendig.\par
+	Laut der aktuellen Planungen sollten die nötigen Technologien innerhalb der nächsten fünf Jahre Einzug in Safari halten. Auch wenn fünf Jahre in der Informatik und der Zeit des Internets wie eine ziemlich lange Zeit erscheinen, kann man positiv in die Zukunft blicken.\par
 	Im Laufe der Zeit, falls immer mehr Seiten, beginnend bei großen Firmen, progressive WebApps entwickeln, sollte sich die Qualität der Implementierungen weiter verbessern. Außerdem werden nach und nach immer mehr Frameworks und Content Managment Systeme Plugins beziehungsweise Erweiterungen anbieten um eine Seite leicht zu einer progressiven WebApp zu machen.\par
 	Alles in allem ist schon jetzt einiges mit progressiven WebApps möglich und prinzipiell für jedermann mit guten Grundkenntnissen der modernen Webtechnologien machbar.\par
 	
@@ -265,8 +272,8 @@ class Foo {
 	\printbibliography[heading=none]
 	
 	\subsection{Quellcode}
-	Der Quellcode ist nach Absprache mit der betreuenden Lehrkraft auf der der beigefügten CD-ROM oder online unter \url{https://github.com/yannick9906/facharbeit17} zu finden.\par
-	Auf der CD-ROM befindet sich außerdem der \LaTeX-Quellcode, mit welchem dieses Dokument beziehungsweise diese PDF-Datei, erstellt wurde.
+	Der Quellcode ist nach Absprache mit der betreuenden Lehrkraft auf der beigefügten CD-ROM oder online unter \url{https://github.com/yannick9906/facharbeit17} zu finden.\par
+	Auf der CD-ROM befindet sich außerdem der \LaTeX-Quellcode, mit welchem dieses Dokument beziehungsweise diese PDF-Datei erstellt wurde.
 	
 	\newpage
 	\section{Erklärung über die selbstständige Anfertigung der Arbeit}
