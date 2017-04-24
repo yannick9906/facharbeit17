@@ -49,7 +49,7 @@ version={3.0},
 	
 	\begin{titlepage}
 		\centering
-		{\scshape\Large Gymnasium zum kurf\"{u}rstlichen Schloss zu Mainz \par}
+		{\scshape\Large Gymnasium am kurf\"{u}rstlichen Schloss zu Mainz \par}
 		\vspace{0.5cm}
 		{\scshape\Large Facharbeit\par}
 		\vspace{2.5cm}
@@ -92,7 +92,7 @@ version={3.0},
 	
 	\subsection{Clientseitige Sprachen}
 	
-	\textbf{HTML. Hypertext Markup Language.} Von Beginn des ``Internets'' an ist HTML die grundlegende Sprache zum Strukturieren einer Webseite. Seit der Urversion von 1992 hat sich HTML stark verändert und weiterentwickelt. Damals war Hauptbestandteil nur der Text und dessen Verlinkung, auch bekannt als Hypertext-Referenzierung.\cite{htmlWiki}\par
+	\textbf{HTML. Hypertext Markup Language.} Von Beginn des ``Internets'' an ist HTML die grundlegende Sprache zum Strukturieren einer Webseite. Seit der Urversion von 1992 hat sich HTML stark verändert und weiterentwickelt. Damals war Hauptbestandteil nur der Text und dessen Verlinkung, auch bekannt als Hyper\-text-Re\-fe\-ren\-zie\-rung.\cite{htmlWiki}\par
 	Über die Jahre hinweg hat W3C HTML zu HTML5 respektive HTML5.1(seit Ende 2016 \cite{html51}) weiterentwickelt. Im Vordergrund stand hierbei vor allem die strikte Trennung von Struktur und Design. In früheren Versionen war es beispielshalber möglich mit \inlinecode{<center>} einen Text zu zentrieren. Dies soll, genauso wie alle anderen designspezifischen Tags und Attribute, mittels CSS gelöst werden.\par
 	In der aktuellsten Revision, HTML5.1, wurde unter anderem die Einbindung von ``responsive Images'', Bildern, welche dem Browser in verschiedenen Auflösungen zur Verfügung gestellt werden, sodass der Browser nur die passende Auflösung laden muss, möglich gemacht. Es wird sich demnach auf die Unterstützung der große Vielfalt an Endgeräten und deren verschiedenen Bildschirmauflösungen und -verhältnissen konzentriert, welches besonders bei WebApps benötigt wird, da diese sowohl mit mobilen Endgeräten, als auch mit herkömmlichen Rechnern benutzbar sein sollen.\cite{html51blog}\par
 	
@@ -123,7 +123,7 @@ version={3.0},
 	%\newpage
 	\section{Die (progressive) WebApp}
 	\subsection{Was ist eine (progressive) Webapp?}
-	Eine WebApp ist tatsächlich schon länger im Internet zu finden als man bei dem sehr modern anmutenden Begriff ``App'' vermuten würde. Tatsächlich ist eine WebApp im Groben eine Internetseite, welche sich wie ein Programm verhält. Demnach sind alle Internetseiten, welche nicht komplett statisch sind, WebApps. Als eines der ersten Beispiele zählt ``SPIRES-HEP'', einem Webinterface zum Zugriff auf eine Datenbank der Stanford Universität im Jahr 1991. Damals wurde ein Vorläufer des heutigen HTTP-GET Verfahrens benutzt, um Daten der Benutzer an den Server zu schicken.\par
+	Eine WebApp ist tatsächlich schon länger im Internet zu finden als man bei dem sehr modern anmutenden Begriff ``App'' vermuten würde. Tatsächlich ist eine WebApp im Groben eine Internetseite, welche sich wie ein Programm verhält. Demnach sind alle Internetseiten, welche nicht komplett statisch sind, WebApps. Als eines der ersten Beispiele zählt ``SPIRES-HEP'', einem Webinterface zum Zugriff auf eine Datenbank der Stanford Universität im Jahr 1991. Damals wurde ein Vor\-läu\-fer des heutigen HTTP-GET Verfahrens benutzt, um Daten der Benutzer an den Server zu schicken.\par
 	Trotzdem war dieses Interface auf Seiten des Clients noch statisch, denn nachdem einmal die Seite geladen wurde, konnte an dieser nichts mehr verändert werden. Auf der Seite des Servers hingegen war diese Seite dynamisch, denn je nach Anfrage des Benutzers hat der Server einen anderen HTML-Code generiert.\par
 	Eine der ersten von der breiten Öffentlichkeit wahrgenommenen WebApp ist die Suchmaschine Yahoo! gewesen, welche ebenfalls von 2 Studenten der Stanford Universität entwickelt wurde und ursprünglich als Verzeichnis von ihren persönlichen Lesezeichen.\cite{webappWiki}\par
 	Seitdem der Begriff AJAX in JavaScript Einzug erhalten hat, ist es möglich Daten vom Webserver abzufragen, ohne dabei die komplette Seite neu laden zu müssen. Seit 2005 fingen große Unternehmen wie Google an ihre Dienste immer interaktiver zu gestalten. Nebst JavaScript sind einige andere Technologien von verschieden Firmen ausprobiert worden, wie Flash von Adobe und Silverlight von Microsoft. Letztendlich konnte sich aber doch JavaScript beziehungsweise ECMA-Script durchsetzten.\cite{webappWikiEN}\par
@@ -190,7 +190,7 @@ version={3.0},
 	\subsubsection{Client Grundlagen}
 	Ursprünglich war sowohl die Me\-nü\-füh\-rung, als auch der Inhalt in einer HTML-Datei. Um auf dieser einen Seite mehrere Seiten ``emulieren'' zu können wurde der Bereich des Inhalts mehrfach hinzugefügt und versteckt. Es wird dann immer nur der Teil des Inhalts sichtbar gemacht, der die aktuelle Seite darstellt. Wenn man von einer normalen Webseite ausgeht, wurden hier mehrere HTML-Dateien in eine vereint. Bei kleineren Seiten führt das nicht merklich zu einem Nachteil, bei größeren kann es zu Performanceeinbußen kommen, da immer der gesamte Inhalt im Hintergrund geparst werden muss.\par
 	Um den entgegenzuwirken wird der passende HTML-Code erst während des Aufrufs der emulierten Unterseite erzeugt. Hierfür bietet die JS-Bibliothek \inlinecode{handle\-bars.js\footnote{\inlinecode{handlebars.js}: \url{http://handlebarsjs.com/}}} sogenannte Templates, dies sind Blaupausen für HTML-Code, welche mit Daten ausgefüllt werden können.\par
-	Zunächst wird die App-Shell, welche das immer gleichbleibende Grundgerüst der Anwendung, wie der Kopfzeile und der Navigations\-leiste, darstellt, von der restlichen Anwendung getrennt. Somit erhalten wir ein ``leeres'' Grundgerüst, in dem ein \inlinecode{div} existiert, welches später mittels DOM-Manipulation mit, von zuvor genannten Blaupausen generierten, Inhalt gefüllt werden kann. Dies bildet die Datei \inlinecode{appUser.html}\par
+	Zunächst wird die App-Shell, welche das immer gleichbleibende Grundgerüst der Anwendung, wie der Kopfzeile und der Navigations\-leiste, darstellt, von der restlichen Anwendung getrennt. Somit erhalten wir ein ``leeres'' Grundgerüst, in dem ein \inlinecode{div} existiert, welches später mittels DOM-Manipulation mit, von zuvor genannten Blaupausen generierten, Inhalt gefüllt werden kann. Dies bildet die Datei \inlinecode{appUser.html}.\par
 	
 	\subsubsection{Das Manifest}
 	Das Manifest ist der Bestandteil einer progressiven WebApp, der es (unter anderem) möglich macht, diese zum Homescreen hinzuzufügen.\par
