@@ -33,10 +33,10 @@
          */
         public function __construct($uID, $username, $passwdHash, $email, $realname, $role, $emails, $endpoints) {
             $this->uID = $uID;
-            $this->username = $username;
+            $this->username = utf8_encode($username);
             $this->passwdHash = $passwdHash;
-            $this->email = $email;
-            $this->realname = $realname;
+            $this->email = utf8_encode($email);
+            $this->realname = utf8_encode($realname);
             $this->role = $role;
             $this->emails = $emails == 1;
             $this->endpoints = json_decode($endpoints);
@@ -103,11 +103,11 @@
          */
         public function saveChanges() {
             $this->pdo->queryUpdate("print3d_user", [
-                "email" => $this->email,
+                "email" => utf8_decode($this->email),
                 "passwd" => $this->passwdHash,
-                "username" => $this->username,
+                "username" => utf8_decode($this->username),
                 "level" => $this->role,
-                "realname" => $this->realname,
+                "realname" => utf8_decode($this->realname),
                 "emails" => $this->emails ? 1:0,
                 "pushkey" => json_encode($this->endpoints)
                 ],
@@ -154,7 +154,7 @@
                     echo "\n[1] Permission Information:\n";
                     echo "Not available on this platform";
                     echo "\n[2] User Information:\n";
-                    echo json_encode($user->toString());
+                    echo json_encode($user);
                     echo "\n[3] Client Information:\n";
                     echo "    Arguments: ".$_SERVER["REQUEST_URI"]."\n";
                     echo "    Req Time : ".$_SERVER["REQUEST_TIME"]."ns\n";
@@ -278,12 +278,12 @@
          */
         function jsonSerialize() {
             return [
-                "uID" => $this->uID,
-                "usrname" => $this->username,
+                "id" => $this->uID,
+                "username" => $this->username,
                 "email" => $this->email,
                 "role" => $this->role,
                 "realname" => $this->realname,
-                "emails" => $this->emails
+                "recvEmails" => $this->emails
             ];
         }
     }

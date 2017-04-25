@@ -445,26 +445,15 @@
          * @since 5.4.0
          */
         function jsonSerialize() {
-            $printing = "";
+            /*$printing = "";
             $style = "";
             $style2 = "";
             if($this->state == 3) $printing = "<div class=\"progress\" style='margin-bottom: -10px;'><div class=\"indeterminate\"></div></div>";
             if($this->state == 4) $printing = "<div class=\"progress\" style='margin-bottom: -10px;'><div class=\"determinate\" style=\"width: 100%;\"></div></div>";
             if($this->state == -2 or $this->state == 6 or $this->state == 7) {$style = "collection"; $style2 = "grey lighten-3";} else $style = "collection z-depth-1";
-            setlocale(LC_MONETARY, "de_DE");
-            if($this->date_confirmed != 0 && $this->date_completed != 0) {
-                $date_confirmed = date("d. M Y - H:i:s",$this->date_confirmed);
-                $date_completed = date("d. M Y - H:i:s",$this->date_completed);
-            } elseif($this->date_confirmed == 0 && $this->date_completed == 0) {
-                $date_confirmed = "Warte auf Annahme";
-                $date_completed = "Warte auf Annahme";
-            } elseif($this->date_confirmed != 0 && $this->date_completed == 0) {
-                $date_confirmed = date("d. M Y - H:i:s",$this->date_confirmed);
-                $date_completed = "Warte auf Einschätzung";
-            }
-            if($this->order_pic == null) $this->order_pic = "";
+            if($this->order_pic == null) $this->order_pic = "";*/
 
-            return [
+            /*return [
                 "oID" => $this->oID,
                 "uID" => $this->uID,
                 "realname" => User::fromUID($this->uID)->getRealname(),
@@ -499,6 +488,39 @@
                 "printing" => $printing,
                 "order_livestream" => $this->order_livestream,
                 "order_pic" => $this->order_pic
+            ];*/
+            setlocale(LC_MONETARY, "de_DE");
+            if($this->date_confirmed != 0 && $this->date_completed != 0) {
+                $date_confirmed = date("d. M Y - H:i:s",$this->date_confirmed);
+                $date_completed = date("d. M Y - H:i:s",$this->date_completed);
+            } elseif($this->date_confirmed == 0 && $this->date_completed == 0) {
+                $date_confirmed = "Warte auf Annahme";
+                $date_completed = "Warte auf Annahme";
+            } elseif($this->date_confirmed != 0 && $this->date_completed == 0) {
+                $date_confirmed = date("d. M Y - H:i:s",$this->date_confirmed);
+                $date_completed = "Warte auf Einschätzung";
+            }
+
+            return ["oID" => $this->oID,
+                    "uID" => $this->uID ,
+                    "filamentType" => $this->filamentType,
+                    "date_created" => $this->date_created,
+                    "date_confirmed" => $date_confirmed,
+                    "date_completed" => $date_completed,
+                    "state" => $this->state,
+                    "comment" => $this->comment,
+                    "precision" => $this->precision,
+                    "order_name" => $this->order_name,
+                    "order_link" => $this->order_link,
+                    "material_length" => $this->material_length,
+                    "material_weight" => $this->material_weight,
+                    "print_time" => $this->print_time,
+                    "cost" => $this->cost,
+                    "order_livestream" => $this->order_livestream,
+                    "order_pic" => $this->order_pic,
+                    "material_cost" => $this->material_cost,
+                    "energy_cost" => $this->energy_cost,
+                    "total_cost" => $this->total_cost
             ];
         }
 

@@ -13,7 +13,7 @@
     require_once '../../classes/User.php';
     require_once '../../classes/Util.php';
 
-    $user = \print3d\Util::checkSession();
+    $user = \print3d\User::checkSession();
     $pdo = new \print3d\PDO_Mysql();
 
     $username = $_POST["username"];

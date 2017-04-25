@@ -12,8 +12,8 @@ self.addEventListener('push', function(event) {
     let title = "Something went wrong";
     let options = {
         body: 'Normally here would be a extremly important Notification. Sorry.',
-        icon: '/new/launcher-icon-196.png',
-        badge: '/new/launcher-icon-196.png'
+        icon: 'img/launcher-icon-196.png',
+        badge: 'img/launcher-icon-196.png'
     };
     if(notifAbout.info == "statechange") {
         if(notifAbout.orderState == 1) {

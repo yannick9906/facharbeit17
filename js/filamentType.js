@@ -22,6 +22,26 @@ class FilamentType {
         });
     }
 
+    static getByFID(fid,callback) {
+        $.ajax({type: "get",
+            url: "api/filaments/details.php?id="+fid,
+            success: (json) => {
+                json = JSON.parse(json);
+                if (json.success != false) {
+                    console.log("[FilamentType] Loading info from Server...");
+                    callback(new FilamentType(json.fID,json.colorname,json.colorcode,json.price,json.pricesale,json.active,json.diameter));
+                    //put into database
+                }
+            },
+            error: (xhr, status, err) => {
+                console.log("[FilamentType] Loading info from db, hence offline...");
+                db.users.get(1).then((filament) => {
+                    callback(new FilamentType(filament.fid,filament.colorname,filament.colorcode,filament.price,filament.pricesale,filament.active,filament.diameter));
+                });
+            }
+        });
+    }
+
     dataChanged() {
 
     }

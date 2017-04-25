@@ -13,20 +13,20 @@
     require_once '../../classes/User.php';
     require_once '../../classes/Util.php';
 
-    $user = \print3d\Util::checkSession();
+    $user = \print3d\User::checkSession();
     $pdo = new \print3d\PDO_Mysql();
+    $userID = intval($_GET["id"]);
+    if($userID == 0) $userToEdit = $user;
+    else $userToEdit = \print3d\User::fromUID();
 
-    $userToEdit = \print3d\User::fromUID(intval($_GET["id"]));
     $realname = $_POST["realname"];
     $passhash = $_POST["passhash"];
     $email = $_POST["email"];
-    $recvEmail = $_POST["recvEmail"];
+    $recvEmail = $_POST["recvEmails"];
 
-    if($realname != "" && $passhash != "" && $email) {
-        $userToEdit->setUEmail($email);
-        if($passhash != "NOUPDATE") $userToEdit->setUPassHash($passhash);
-        $userToEdit->setURealname($realname);
-        $userToEdit->setReceivingEmails($recvEmail == 1);
-        $userToEdit->saveChanges();
-        echo json_encode(["success" => "1"]);
-    } else echo json_encode(["success" => "0", "error" => "missing fields"]);
+    if(isset($_POST["email"])) $userToEdit->setEmail($email);
+    if(isset($_POST["passhash"])) $userToEdit->setPasswdHash($passhash);
+    if(isset($_POST["realname"])) $userToEdit->setRealname($realname);
+    if(isset($_POST["recvEmails"])) $userToEdit->setReceivingEmails($recvEmail == 1);
+    $userToEdit->saveChanges();
+    echo json_encode(["success" => "1"]);

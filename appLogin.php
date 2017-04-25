@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if($_GET["err"] == 3) {
         session_destroy();
     }
@@ -36,7 +37,7 @@
     <div id="bg" class="bg valign-wrapper" style="position: absolute; height: 100%; width: 100%;">
         <div class="valign center" style="width: 100%;">
             <div class="card-panel row left-align" style="display: inline-block">
-                <span class="bolden orange-text col s6">YANNICK 3D DRUCKE - LOGIN</span><span class="right-align grey-text text-lighten-2 col s6">Moovit Tool v1.0a</span><br/><br/>
+                <span class="bolden orange-text col s6">YANNICK 3D DRUCKE - LOGIN</span><span class="right-align grey-text text-lighten-2 col s6">3dprintshop v4.0.0bf</span><br/><br/>
                 <div id="loginFields">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
